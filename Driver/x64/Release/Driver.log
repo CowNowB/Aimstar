@@ -1,0 +1,25 @@
+﻿  entry.cpp
+C:\Users\CowNow\source\repos\AimStar\Driver\Kernel\functions.h(8,47): warning C4312: “类型强制转换”: 从“uint32_t”转换到更大的“HANDLE”
+  (编译源文件“Kernel/entry.cpp”)
+  
+C:\Users\CowNow\source\repos\AimStar\Driver\Kernel\functions.h(6,31): warning C4305: “return”: 从“NTSTATUS”到“bool”截断
+  (编译源文件“Kernel/entry.cpp”)
+  
+C:\Users\CowNow\source\repos\AimStar\Driver\Kernel\functions.h(26,47): warning C4312: “类型强制转换”: 从“uint32_t”转换到更大的“HANDLE”
+  (编译源文件“Kernel/entry.cpp”)
+  
+C:\Users\CowNow\source\repos\AimStar\Driver\Kernel\functions.h(24,31): warning C4305: “return”: 从“NTSTATUS”到“bool”截断
+  (编译源文件“Kernel/entry.cpp”)
+  
+C:\Users\CowNow\source\repos\AimStar\Driver\Kernel\functions.h(43,47): warning C4312: “类型强制转换”: 从“uint32_t”转换到更大的“HANDLE”
+  (编译源文件“Kernel/entry.cpp”)
+  
+C:\Users\CowNow\source\repos\AimStar\Driver\Kernel\functions.h(55,47): warning C4312: “类型强制转换”: 从“uint32_t”转换到更大的“HANDLE”
+  (编译源文件“Kernel/entry.cpp”)
+  
+C:\Users\CowNow\source\repos\AimStar\Driver\Kernel\functions.h(67,47): warning C4312: “类型强制转换”: 从“uint32_t”转换到更大的“HANDLE”
+  (编译源文件“Kernel/entry.cpp”)
+  
+  正在生成代码
+  已完成代码的生成
+  Driver.vcxproj -> C:\Users\CowNow\source\repos\AimStar\x64\Release\Driver.sys
