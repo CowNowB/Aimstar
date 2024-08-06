@@ -1,0 +1,76 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+/CS2_External/x64/Release
+/CS2_External/x64/Ring0
+/CS2_External/x64/Ring3
+/.vs/AimStar/v17
+/x64/Release
+/x64/Ring0
+/x64/Ring3
+/.vs/CS2_External
+/CS2_External/imgui.ini
+/.vs/VSWorkspaceState.json
+/CS2_External/Resources/English.h
+CS2_External/x64/Debug/CS2_External.log
+CS2_External/x64/Debug/vc143.pdb
+x64/Debug/AimStar.pdb
+CS2_External/x64/Debug/vc143.idb
+CS2_External/x64/Debug/CS2_External.tlog/unsuccessfulbuild
+CS2_External/x64/Debug/CS2_External.tlog/rc.write.1.tlog
+CS2_External/x64/Debug/CS2_External.tlog/rc.read.1.tlog
+CS2_External/x64/Debug/CS2_External.tlog/rc.command.1.tlog
+CS2_External/x64/Debug/CS2_External.tlog/link.read.4.tlog
+CS2_External/x64/Debug/CS2_External.tlog/link.read.3.tlog
+CS2_External/x64/Debug/CS2_External.tlog/link.write.1.tlog
+CS2_External/x64/Debug/CS2_External.tlog/link.read.2.tlog
+CS2_External/x64/Debug/CS2_External.tlog/link.read.1.tlog
+CS2_External/x64/Debug/CS2_External.tlog/link.command.1.tlog
+CS2_External/x64/Debug/CS2_External.tlog/link-rc.write.1.tlog
+CS2_External/x64/Debug/CS2_External.tlog/link-cvtres.write.1.tlog
+CS2_External/x64/Debug/CS2_External.tlog/link-cvtres.read.1.tlog
+CS2_External/x64/Debug/CS2_External.tlog/link-rc.read.1.tlog
+CS2_External/x64/Debug/CS2_External.tlog/CS2_External.lastbuildstate
+CS2_External/x64/Debug/CS2_External.tlog/CL.write.1.tlog
+CS2_External/x64/Debug/CS2_External.tlog/CL.read.1.tlog
+CS2_External/x64/Debug/CS2_External.tlog/CL.command.1.tlog
+CS2_External/x64/Debug/CS2_External.res
+/Driver/x64/Release
+/Driver/x64/Debug
+
+*.tlog
+*.iobj
+*.ipdb
+*.pdb
+*.recipe
+*.lastbuildstate
+/Driver/x64

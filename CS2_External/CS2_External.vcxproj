@@ -107,10 +107,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Ring0|x64'">
     <TargetName>AimStar-Ring0</TargetName>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <LibraryPath>$(ProjectDir)Utils\kdm;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
     <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+    <IncludePath>$(ProjectDir)Utils\kdm;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Ring3|x64'">
     <TargetName>AimStar-Ring3</TargetName>
@@ -200,7 +201,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)Utils\kdm\kdmapper_lib-Release.lib;$(CoreLibraryDependencies)</AdditionalDependencies>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
       <EnableUAC>true</EnableUAC>
     </Link>
@@ -286,6 +287,13 @@
     <ClInclude Include="Utils\GlobalVars.h" />
     <ClInclude Include="Utils\Initial\system.h" />
     <ClInclude Include="Utils\Initial\Init.h" />
+    <ClInclude Include="Utils\kdm\intel_driver.hpp" />
+    <ClInclude Include="Utils\kdm\intel_driver_resource.hpp" />
+    <ClInclude Include="Utils\kdm\kdmapper.hpp" />
+    <ClInclude Include="Utils\kdm\nt.hpp" />
+    <ClInclude Include="Utils\kdm\portable_executable.hpp" />
+    <ClInclude Include="Utils\kdm\service.hpp" />
+    <ClInclude Include="Utils\kdm\utils.hpp" />
     <ClInclude Include="Utils\ProcessManager.hpp" />
     <ClInclude Include="Utils\Random.h" />
     <ClInclude Include="Utils\newStructs.hpp" />

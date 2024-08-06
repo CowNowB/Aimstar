@@ -185,6 +185,13 @@
     <ClInclude Include="Utils\driver.hpp" />
     <ClInclude Include="Utils\XorStr.h" />
     <ClInclude Include="Utils\newStructs.hpp" />
+    <ClInclude Include="Utils\kdm\intel_driver.hpp" />
+    <ClInclude Include="Utils\kdm\intel_driver_resource.hpp" />
+    <ClInclude Include="Utils\kdm\kdmapper.hpp" />
+    <ClInclude Include="Utils\kdm\nt.hpp" />
+    <ClInclude Include="Utils\kdm\portable_executable.hpp" />
+    <ClInclude Include="Utils\kdm\service.hpp" />
+    <ClInclude Include="Utils\kdm\utils.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">
