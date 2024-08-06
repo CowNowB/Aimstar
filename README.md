@@ -1,11 +1,11 @@
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/CowNowK/AimStar/master/AS_Logo.png" alt="icon" style="width: 100px; height: 100px"><br>
+  <img src="https://raw.githubusercontent.com/CowNowB/Aimstar/master/AS_Logo.png" alt="icon" style="width: 100px; height: 100px"><br>
   AimStar
 </h1>
 <p align="center">
 <a href="https://en.wikipedia.org/wiki/C%2B%2B"><img src="https://img.shields.io/badge/build-C++-blue?style=flat&label=Language&logo=visualstudio&logoColor=%231082c3"></a>
 <a href="https://store.steampowered.com/app/730/CounterStrike_2"><img src="https://img.shields.io/badge/Game-CS2-red.svg?style=flat&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEiIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cGF0aCBkPSJNMTI5IDExMWMtNTUgNC05MyA2Ni05MyA3OEwwIDM5OGMtMiA3MCAzNiA5MiA2OSA5MWgxYzc5IDAgODctNTcgMTMwLTEyOGgyMDFjNDMgNzEgNTAgMTI4IDEyOSAxMjhoMWMzMyAxIDcxLTIxIDY5LTkxbC0zNi0yMDljMC0xMi00MC03OC05OC03OGgtMTBjLTYzIDAtOTIgMzUtOTIgNDJIMjM2YzAtNy0yOS00Mi05Mi00MmgtMTV6IiBmaWxsPSIjZmZmIi8+PC9zdmc+"></a>
-<a href="https://github.com/CowNowK/AimStar/releases"><img src="https://img.shields.io/github/v/release/CowNowK/AimStar?color=orange&logoColor=orange&label=Download&logo=DocuSign"></a>
+<a href="https://github.com/CowNowB/Aimstar/releases"><img src="https://img.shields.io/github/v/release/CowNowB/Aimstar?color=orange&logoColor=orange&label=Download&logo=DocuSign"></a>
 <a href="https://discord.com/invite/VgRrxwesPz"><img src="https://img.shields.io/discord/1179009716307886080?logo=discord&logoColor=%234ec920"></a>
 </p>
 
