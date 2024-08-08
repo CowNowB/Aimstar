@@ -191,10 +191,13 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
-      <Optimization>Disabled</Optimization>
+      <Optimization>MaxSpeed</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <LanguageStandard_C>Default</LanguageStandard_C>
       <StringPooling>true</StringPooling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <OpenMPSupport>true</OpenMPSupport>
+      <RemoveUnreferencedCodeData>false</RemoveUnreferencedCodeData>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
