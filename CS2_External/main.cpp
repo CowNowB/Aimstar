@@ -932,6 +932,22 @@ void UpdateLang()
 	return;
 }
 
+void UpdateSteamPath() {
+	HKEY hKey;
+	wchar_t steamPath[MAX_PATH];
+	DWORD bufferSize = sizeof(steamPath);
+
+	if (RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"SOFTWARE\\WOW6432Node\\Valve\\Steam", 0, KEY_READ, &hKey) == ERROR_SUCCESS) {
+		if (RegQueryValueExW(hKey, L"InstallPath", NULL, NULL, (LPBYTE)steamPath, &bufferSize) == ERROR_SUCCESS) {
+			RegCloseKey(hKey);
+			MenuConfig::SteamPath = steamPath;
+		}
+		RegCloseKey(hKey);
+	}
+	else
+		MenuConfig::SteamPath = L"C:\\Program Files(x86)\\Steam";
+	return;
+}
 
 void Cheat()
 {
@@ -943,16 +959,10 @@ void Cheat()
 	}
 		
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	//Gets a standard output device handle  
-	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);	//Set the text color to green  
+
 	srand((unsigned)time(NULL));
 	RandomTitle();
-	cout << R"(                                                                   
-    ___    _          _____ __            
-   /   |  (_)___ ___ / ___// /_____ ______
-  / /| | / / __ `__ \\__ \/ __/ __ `/ ___/
- / ___ |/ / / / / / /__/ / /_/ /_/ / /    
-/_/  |_/_/_/ /_/ /_/____/\__/\__,_/_/    
-	)" << endl;
+	UpdateSteamPath();
 #ifdef USERMODE
 
 	cout << XorStr("[WARN] You are using usermode version, you may have higher possibility to get banned as VAC detected.") << endl;
@@ -961,6 +971,14 @@ void Cheat()
 	kdmap(1, nullptr);
 	remove("ASDriver.sys");
 #endif // USERMODE
+	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);	//Set the text color to green  
+	cout << R"(                                                                   
+    ___    _          _____ __            
+   /   |  (_)___ ___ / ___// /_____ ______
+  / /| | / / __ `__ \\__ \/ __/ __ `/ ___/
+ / ___ |/ / / / / / /__/ / /_/ /_/ / /    
+/_/  |_/_/_/ /_/ /_/____/\__/\__,_/_/    
+	)" << endl;
 	printf(XorStr("Build-%s-%s\n"), __DATE__, __TIME__);
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
@@ -973,7 +991,7 @@ void Cheat()
 	}
 	MenuConfig::path = documentsPath;
 	MenuConfig::path += XorStr("\\AimStar");
-	MenuConfig::HWID = Init::Client::GenerateHWID();
+	MenuConfig::HWID = Init::Client::G();
 	printf("%s\n",MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str());
 	if (checkHWIDFromYAML(MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str()))
 		MenuConfig::DRM = true;

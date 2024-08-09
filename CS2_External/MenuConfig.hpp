@@ -5,29 +5,32 @@
 
 namespace MenuConfig
 {
+
 	inline std::string path = "";
-	inline std::string LocalVersion = "4.6.3";
+	inline std::string LocalVersion = "4.7.0";
 	inline std::string HWID = "";
 	inline bool DRM = false;
 
 	struct {
 		// 0: Visual 1: Aimbot 2: Misc 3: Config
 		int MenuPage = 0;
-		ImVec2 LogoPos				= ImVec2(30.f, 30.f);
-		ImVec2 Logo2Pos				= ImVec2(25.f, 25.f);
-		ImVec2 Logo3Pos				= ImVec2(20.f, 30.f);
-		ImVec2 Button1Pos			= ImVec2(30.f, 142.f);
-		ImVec2 Button2Pos			= ImVec2(30.f, 142.f + 90.f);
-		ImVec2 Button3Pos			= ImVec2(30.f, 142.f + 180.f);
-		ImVec2 Button4Pos			= ImVec2(30.f, 142.f + 270.f);
-		ImVec2 ChildPos				= ImVec2(257.f, 20.f);
-		ImVec2 ChildSize			= ImVec2(574.f, 474.f);
+		ImVec2 LogoPos				= ImVec2(20.f, 30.f);
+		ImVec2 Logo2Pos				= ImVec2(15.f, 25.f);
+		ImVec2 Logo3Pos				= ImVec2(15.f, 30.f);
+		ImVec2 Button1Pos			= ImVec2(20.f, 120.f);
+		ImVec2 Button2Pos			= ImVec2(20.f, 120.f + 60.f);
+		ImVec2 Button3Pos			= ImVec2(20.f, 120.f + 120.f);
+		ImVec2 Button4Pos			= ImVec2(20.f, 120.f + 180.f);
+		ImVec2 ChildPos				= ImVec2(190.f, 15.f);
+		ImVec2 ChildSize			= ImVec2(645.f, 485.f);
 		ImColor BorderColor_Yellow	= ImColor(255, 204, 0, 255);
 		ImColor BorderColor_Purple	= ImColor(255, 0, 238, 255);
 		ImColor BorderColor_Red		= ImColor(200, 40, 40, 255);
 	} WCS;	// Window Component Settings
-
+	inline std::wstring SteamPath = L"";
+	inline std::wstring AvatarPath = L"";
 	inline std::string Country = "";
+	inline std::string UserName = "";
 	inline int MaxFrameRate = 60;
 	inline bool defaultConfig = false;
 	inline int Language = 0;

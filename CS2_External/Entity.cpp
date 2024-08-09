@@ -61,7 +61,6 @@ bool CEntity::UpdateController(const DWORD64& PlayerControllerAddress)
 	if (PlayerControllerAddress == 0)
 		return false;
 	this->Controller.Address = PlayerControllerAddress;
-
 	if (!this->Controller.GetHealth())
 		return false;
 	if (!this->Controller.GetIsAlive())
@@ -74,9 +73,8 @@ bool CEntity::UpdateController(const DWORD64& PlayerControllerAddress)
 		return false;
 	if (!this->Controller.GetMoney())
 		return false;
-
+	this->Controller.GetPlayerSteamID();
 	this->Pawn.Address = this->Controller.GetPlayerPawnAddress();
-
 	return true;
 }
 
@@ -184,6 +182,10 @@ bool PlayerController::GetPlayerName()
 	return true;
 }
 
+bool PlayerController::GetPlayerSteamID()
+{
+	return GetDataAddressWithOffset<INT64>(Address, Offset::PlayerController.m_steamID, this->SteamID);
+}
 bool PlayerPawn::GetViewAngle()
 {
 	return GetDataAddressWithOffset<Vec2>(Address, Offset::Pawn.angEyeAngles, this->ViewAngle);
@@ -261,6 +263,8 @@ DWORD64 PlayerController::GetPlayerPawnAddress()
 
 	return EntityPawnAddress;
 }
+
+
 
 bool PlayerPawn::GetPos()
 {

@@ -23,6 +23,7 @@ public:
 	int AliveStatus = 0;
 	int CtrlBot = 0;
 	DWORD Pawn = 0;
+	INT64 SteamID = 0;
 	std::string PlayerName;
 public:
 	bool GetMoney();
@@ -32,6 +33,7 @@ public:
 	bool GetIsCtrlBot();
 	bool GetPlayerName();
 	DWORD64 GetPlayerPawnAddress();
+	bool GetPlayerSteamID();
 };
 
 class PlayerPawn

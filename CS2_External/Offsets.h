@@ -106,6 +106,7 @@ namespace Offset
 		DWORD PawnArmor = cs2_dumper::schemas::client_dll::CCSPlayerController::m_iPawnArmor;
 		DWORD HasDefuser = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnHasDefuser;
 		DWORD HasHelmet = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnHasHelmet;
+		DWORD m_steamID = cs2_dumper::schemas::client_dll::CBasePlayerController::m_steamID;
 	} PlayerController;
 
 	struct

@@ -21,6 +21,7 @@ ID3D11ShaderResourceView* MenuButton2 = NULL;
 ID3D11ShaderResourceView* MenuButton3 = NULL;
 ID3D11ShaderResourceView* MenuButton4 = NULL;
 ID3D11ShaderResourceView* HitboxImage = NULL;
+ID3D11ShaderResourceView* AvatarImage = NULL;
 
 int LogoW = 0, LogoH = 0;
 int LogoW2 = 0, LogoH2 = 0;
@@ -28,7 +29,7 @@ int LogoW3 = 0, LogoH3 = 0;
 int buttonW = 0;
 int buttonH = 0;
 int hitboxW = 0, hitboxH = 0;
-
+int avatarW = 0, avatarH = 0;
 // checkbox for hitbox
 bool checkbox1 = true;
 bool checkbox2 = false;
@@ -91,7 +92,12 @@ namespace GUI
 			}
 		}
 	}
-
+	char* wstringToChar(const std::wstring& wstr) {
+		int len = WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), -1, NULL, 0, NULL, NULL);
+		char* buffer = new char[len];
+		WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), -1, buffer, len, NULL, NULL);
+		return buffer;
+	}//ONETIME USING..
 	void LoadImages()
 	{
 		if (AS_Logo == NULL)
@@ -105,7 +111,10 @@ namespace GUI
 			Gui.LoadTextureFromMemory(Images::MiscButton, sizeof Images::MiscButton, &MenuButton3, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::ConfigButton, sizeof Images::ConfigButton, &MenuButton4, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::ZekamashiImg, sizeof Images::ZekamashiImg, &HitboxImage, &hitboxW, &hitboxH);
+
 		}
+		if (AvatarImage == NULL)
+			Gui.LoadTextureFromFile(wstringToChar(MenuConfig::AvatarPath), &AvatarImage, &avatarW, &avatarH);
 	}
 
 	// Components Settings
@@ -254,8 +263,8 @@ namespace GUI
 		{
 			ImGui::SetCursorPos(LogoPos);
 			ImGui::Image(ImageID, LogoSize);
-			ImGui::SetCursorPosY(5);
-			ImGui::TextColored(ImColor(255, 255, 255, 35), MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str());
+			ImGui::SetCursorPos(ImVec2(20,5));
+			ImGui::TextColored(ImColor(255, 255, 255, 45), MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str());
 
 			ImGui::SetCursorPos(MenuConfig::WCS.Button1Pos);
 			ImGui::Image((void*)MenuButton1, ImVec2(buttonW, buttonH));
@@ -297,20 +306,21 @@ namespace GUI
 				ImVec2(MenuConfig::WCS.Button4Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button4Pos.y + buttonH + ImGui::GetWindowPos().y),
 				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
-			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5);
-
-
-
+			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15,380));
+			ImGui::Image((void*)AvatarImage, ImVec2(48, 48));
+			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15);
+			ImGui::Text(XorStr("User:\n%s"), getenv("USERNAME")); //If u want current player name -> MenuConfig::UserName (2 lazy to adapt non-ascii)
+			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15);
 			if (MenuConfig::SafeMode)
 				ImGui::TextColored(ImColor(50, 255, 0, 255), XorStr("Safe Mode ON"));
 			else
 				ImGui::TextColored(ImColor(255, 25, 0, 255), XorStr("Safe Mode OFF"));
-			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15, 105));
+			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15, 85));
 #ifdef USERMODE
 
-			ImGui::Text(XorStr("Ring3-%s-%s"), __DATE__, __TIME__);
+			ImGui::Text(XorStr("Ring3-%s"), __DATE__);
 #else
-			ImGui::Text(XorStr("Kernel-%s-%s"), __DATE__, __TIME__);
+			ImGui::Text(XorStr("Kernel-%s"), __DATE__);
 #endif // USERMODE
 			
 			ImGui::SetCursorPos(MenuConfig::WCS.ChildPos);

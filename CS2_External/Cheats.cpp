@@ -122,9 +122,13 @@ void Cheats::Run()
 	LocalEntity.UpdateClientData();
 	if (!LocalEntity.UpdateController(LocalControllerAddress))
 		return;
+	if (MenuConfig::AvatarPath == L"")
+		MenuConfig::AvatarPath = MenuConfig::SteamPath + L"\\config\\avatarcache\\" + std::to_wstring(LocalEntity.Controller.SteamID) + L".png";
+	if (MenuConfig::UserName != LocalEntity.Controller.PlayerName)
+		MenuConfig::UserName = LocalEntity.Controller.PlayerName;
+	//std::wcout << MenuConfig::AvatarPath << std::endl;
 	if (!LocalEntity.UpdatePawn(LocalPawnAddress) && !MiscCFG::WorkInSpec)
 		return;
-
 	// HealthBar Map
 	static std::map<DWORD64, Render::HealthBar> HealthBarMap;
 
