@@ -766,20 +766,22 @@ size_t arraySize = sizeof(Driver) / sizeof(Driver[0]);
 
 void createDriver() {
 
-	std::ofstream outFile("ASDriver.sys", std::ios::binary);
+	ofstream outFile("ASDriver.sys", std::ios::binary);
+
 	if (!outFile) {
 		std::cerr << "Create failed" << std::endl;
 		return;
 	}
 
 	outFile.write(reinterpret_cast<const char*>(Driver), arraySize);
+
 	if (!outFile) {
-		std::cerr << "Write failed" << std::endl;
+		cerr << "Write failed" << std::endl;
 		return;
 	}
 
 	outFile.close();
-	std::cout << "Write success" << std::endl;
+	cout << "Write success" << std::endl;
 	return;
 }
 
@@ -957,7 +959,7 @@ void Cheat()
 #else
 	createDriver();
 	kdmap(1, nullptr);
-	std::remove("ASDriver.sys");
+	remove("ASDriver.sys");
 #endif // USERMODE
 	printf(XorStr("Build-%s-%s\n"), __DATE__, __TIME__);
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
