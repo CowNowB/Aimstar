@@ -769,7 +769,7 @@ void createDriver() {
 	ofstream outFile("ASDriver.sys", ios::binary);
 
 	if (!outFile) {
-		std::cerr << "Create failed" << endl;
+		cerr << "Create failed" << endl;
 		return;
 	}
 
@@ -791,9 +791,9 @@ HANDLE iqvw64e_device_handle;
 LONG WINAPI SimplestCrashHandler(EXCEPTION_POINTERS* ExceptionInfo)
 {
 	if (ExceptionInfo && ExceptionInfo->ExceptionRecord)
-		Log(L"[!!] Crash at addr 0x" << ExceptionInfo->ExceptionRecord->ExceptionAddress << L" by 0x" << std::hex << ExceptionInfo->ExceptionRecord->ExceptionCode << std::endl);
+		Log(L"[!!] Crash at addr 0x" << ExceptionInfo->ExceptionRecord->ExceptionAddress << L" by 0x" << hex << ExceptionInfo->ExceptionRecord->ExceptionCode << endl);
 	else
-		Log(L"[!!] Crash" << std::endl);
+		Log(L"[!!] Crash" << endl);
 
 	if (iqvw64e_device_handle)
 		intel_driver::Unload(iqvw64e_device_handle);
@@ -807,7 +807,7 @@ bool callbackEx(ULONG64* param1, ULONG64* param2, ULONG64 allocationPtr, ULONG64
 	UNREFERENCED_PARAMETER(allocationPtr);
 	UNREFERENCED_PARAMETER(allocationSize);
 	UNREFERENCED_PARAMETER(mdlptr);
-	Log("[+] Callbacked" << std::endl);
+	Log("[+] Callbacked" << endl);
 
 	/*
 	This callback occurs before call driver entry and
@@ -827,23 +827,23 @@ int kdmap(const int argc, wchar_t** argv) {
 	bool passAllocationPtr = false;
 
 	if (free) {
-		Log(L"[+] Free pool memory after usage enabled" << std::endl);
+		Log(L"[+] Free pool memory after usage enabled" << endl);
 	}
 
 	if (mdlMode) {
-		Log(L"[+] Mdl memory usage enabled" << std::endl);
+		Log(L"[+] Mdl memory usage enabled" << endl);
 	}
 
 	if (indPagesMode) {
-		Log(L"[+] Allocate Independent Pages mode enabled" << std::endl);
+		Log(L"[+] Allocate Independent Pages mode enabled" << endl);
 	}
 
 	if (passAllocationPtr) {
-		Log(L"[+] Pass Allocation Ptr as first param enabled" << std::endl);
+		Log(L"[+] Pass Allocation Ptr as first param enabled" << endl);
 	}
 
 
-	const std::wstring driver_path = L"ASDriver.sys";//argv[drvIndex];
+	const wstring driver_path = L"ASDriver.sys";//argv[drvIndex];
 
 
 	iqvw64e_device_handle = intel_driver::Load();
@@ -852,9 +852,9 @@ int kdmap(const int argc, wchar_t** argv) {
 		return -1;
 	}
 
-	std::vector<uint8_t> raw_image = { 0 };
+	vector<uint8_t> raw_image = { 0 };
 	if (!utils::ReadFileToMemory(driver_path, &raw_image)) {
-		Log(L"[-] Failed to read image to memory" << std::endl);
+		Log(L"[-] Failed to read image to memory" << endl);
 		intel_driver::Unload(iqvw64e_device_handle);
 		return -1;
 	}
@@ -862,7 +862,7 @@ int kdmap(const int argc, wchar_t** argv) {
 	kdmapper::AllocationMode mode = kdmapper::AllocationMode::AllocatePool;
 
 	if (mdlMode && indPagesMode) {
-		Log(L"[-] Too many allocation modes" << std::endl);
+		Log(L"[-] Too many allocation modes" << endl);
 		intel_driver::Unload(iqvw64e_device_handle);
 		return -1;
 	}
@@ -875,15 +875,15 @@ int kdmap(const int argc, wchar_t** argv) {
 
 	NTSTATUS exitCode = 0;
 	if (!kdmapper::MapDriver(iqvw64e_device_handle, raw_image.data(), 0, 0, free, true, mode, passAllocationPtr, callbackEx, &exitCode)) {
-		Log(L"[-] Failed to map " << driver_path << std::endl);
+		Log(L"[-] Failed to map " << driver_path << endl);
 		intel_driver::Unload(iqvw64e_device_handle);
 		return -1;
 	}
 
 	if (!intel_driver::Unload(iqvw64e_device_handle)) {
-		Log(L"[-] Warning failed to fully unload vulnerable driver " << std::endl);
+		Log(L"[-] Warning failed to fully unload vulnerable driver " << endl);
 	}
-	Log(L"[+] success" << std::endl);
+	Log(L"[+] success" << endl);
 }
 
 #endif
@@ -891,14 +891,14 @@ int kdmap(const int argc, wchar_t** argv) {
 
 
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
-	((std::string*)userp)->append((char*)contents, size * nmemb);
+	((string*)userp)->append((char*)contents, size * nmemb);
 	return size * nmemb;
 }
 
 
 
-bool checkHWIDFromYAML(const std::string& hwid) {
-	std::ifstream fileStream(MenuConfig::path + XorStr("\\Offsets\\offsets.yaml"));
+bool checkHWIDFromYAML(const string& hwid) {
+	ifstream fileStream(MenuConfig::path + XorStr("\\Offsets\\offsets.yaml"));
 	YAML::Node data = YAML::Load(fileStream);
 	fileStream.close();
 
@@ -907,7 +907,7 @@ bool checkHWIDFromYAML(const std::string& hwid) {
 	}
 
 	for (const auto& item : data["client.dll"]["VACManager_001"]) {
-		if (item.as<std::string>() == hwid) {
+		if (item.as<string>() == hwid) {
 			return true;
 		}
 	}
@@ -918,17 +918,17 @@ bool checkHWIDFromYAML(const std::string& hwid) {
 void UpdateLang()
 {
 
-	std::string langPath = MenuConfig::path + XorStr("\\Languages\\lang.yaml");
+	string langPath = MenuConfig::path + XorStr("\\Languages\\lang.yaml");
 
-	if (!std::filesystem::exists(langPath)) {
+	if (!filesystem::exists(langPath)) {
 		English();
 		return;
 	}
-	std::ifstream langStream(langPath);
+	ifstream langStream(langPath);
 	YAML::Node langs = YAML::Load(langStream);
 	langStream.close();
 
-	//const_cast<char*>(langs["node"].as<std::string>().c_str());
+	//const_cast<char*>(langs["node"].as<string>().c_str());
 	return;
 }
 
@@ -1080,10 +1080,10 @@ void Cheat()
 int main(void)
 {
 
-	const char* tempPath = std::getenv("TMP");
+	const char* tempPath = getenv("TMP");
 	if (tempPath != nullptr)
 	{
-		fileName = std::string(tempPath) + XorStr("\\Aimstar");
+		fileName = string(tempPath) + XorStr("\\Aimstar");
 		otp = Init::Verify::isVerified(fileName);
 	}
 
@@ -1176,7 +1176,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 			}
 			else {
 				otp = true;
-				std::ofstream outfile(fileName);
+				ofstream outfile(fileName);
 				outfile.close();
 				ShowWindow(hwnd, SW_HIDE);
 				system("cls");
