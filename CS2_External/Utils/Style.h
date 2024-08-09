@@ -245,7 +245,7 @@ namespace Styles
         style.Colors[ImGuiCol_Button] = ImVec4(0.7843137383460999f, 0.1568627506494522f, 0.1568627506494522f, 1.0f);
         style.Colors[ImGuiCol_ButtonHovered] = ImVec4(0.8627451062202454f, 0.2352941185235977f, 0.1568627506494522f, 1.0f);
         style.Colors[ImGuiCol_ButtonActive] = ImVec4(0.6666666865348816f, 0.1176470592617989f, 0.1176470592617989f, 1.0f);
-        style.Colors[ImGuiCol_Header] = ImVec4(0.7843137383460999f, 0.1568627506494522f, 0.1568627506494522f, 1.0f);
+        style.Colors[ImGuiCol_Header] = ImVec4(0.4843137383460999f, 0.1568627506494522f, 0.1568627506494522f, 1.0f);
         style.Colors[ImGuiCol_HeaderHovered] = ImVec4(0.7843137383460999f, 0.1568627506494522f, 0.1568627506494522f, 1.0f);
         style.Colors[ImGuiCol_HeaderActive] = ImVec4(0.6666666865348816f, 0.1176470592617989f, 0.1176470592617989f, 1.0f);
         style.Colors[ImGuiCol_Separator] = ImVec4(0.1568627506494522f, 0.168627455830574f, 0.1764705926179886f, 1.0f);
