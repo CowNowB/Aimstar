@@ -766,22 +766,22 @@ size_t arraySize = sizeof(Driver) / sizeof(Driver[0]);
 
 void createDriver() {
 
-	ofstream outFile("ASDriver.sys", std::ios::binary);
+	ofstream outFile("ASDriver.sys", ios::binary);
 
 	if (!outFile) {
-		std::cerr << "Create failed" << std::endl;
+		std::cerr << "Create failed" << endl;
 		return;
 	}
 
 	outFile.write(reinterpret_cast<const char*>(Driver), arraySize);
 
 	if (!outFile) {
-		cerr << "Write failed" << std::endl;
+		cerr << "Write failed" << endl;
 		return;
 	}
 
 	outFile.close();
-	cout << "Write success" << std::endl;
+	cout << "Write success" << endl;
 	return;
 }
 
