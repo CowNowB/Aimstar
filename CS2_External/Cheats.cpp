@@ -139,7 +139,6 @@ void Cheats::Run()
 	Base_Radar Radar;
 	if (RadarCFG::ShowRadar)
 		RadarSetting(Radar);
-
 	for (int i = 0; i < 64; i++)
 	{
 		CEntity Entity;
@@ -189,19 +188,20 @@ void Cheats::Run()
 		//update Bone select
 		if (AimControl::HitboxList.size() != 0)
 		{
-			for (int i = 0; i < AimControl::HitboxList.size(); i++)
+
+			for (int p = 0; p< AimControl::HitboxList.size(); p++)
 			{
 				Vec3 TempPos;
-				DistanceToSight = Entity.GetBone().BonePosList[AimControl::HitboxList[i]].ScreenPos.DistanceTo({ Gui.Window.Size.x / 2,Gui.Window.Size.y / 2 });
+				DistanceToSight = Entity.GetBone().BonePosList[AimControl::HitboxList[p]].ScreenPos.DistanceTo({ Gui.Window.Size.x / 2,Gui.Window.Size.y / 2 });
 				if (LocalEntity.Pawn.ShotsFired >= AimControl::AimBullet + 1 && MenuConfig::SparyPosition != 0)
 				{
 					if (!MenuConfig::VisibleCheck ||
 						Entity.Pawn.bSpottedByMask & (DWORD64(1) << (LocalPlayerControllerIndex)) ||
-						LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (i)))
+						LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (p)))
 					{
-						TempPos = Entity.GetBone().BonePosList[AimControl::HitboxList[i]].Pos;
-						if (AimControl::HitboxList[i] == MenuConfig::SparyPositionIndex){
-							if (AimControl::HitboxList[i] == BONEINDEX::head)
+						TempPos = Entity.GetBone().BonePosList[AimControl::HitboxList[p]].Pos;
+						if (AimControl::HitboxList[p] == MenuConfig::SparyPositionIndex){
+							if (AimControl::HitboxList[p] == BONEINDEX::head)
 								TempPos.z -= 1.f;
 							AimPosList.push_back(TempPos);
 						}
@@ -213,12 +213,11 @@ void Cheats::Run()
 
 					if (!MenuConfig::VisibleCheck ||
 						Entity.Pawn.bSpottedByMask & (DWORD64(1) << (LocalPlayerControllerIndex)) ||
-						LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (i)))
+						LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (p)))
 					{
-						TempPos = Entity.GetBone().BonePosList[AimControl::HitboxList[i]].Pos;
-						if (AimControl::HitboxList[i] == BONEINDEX::head)
+						TempPos = Entity.GetBone().BonePosList[AimControl::HitboxList[p]].Pos;
+						if (AimControl::HitboxList[p] == BONEINDEX::head)
 							TempPos.z -= 1.f;
-
 						AimPosList.push_back(TempPos);
 					}
 				}
@@ -270,7 +269,31 @@ void Cheats::Run()
 		Glow::Run(Entity);
 
 	}
-	
+
+	// Aimbot
+	if (MenuConfig::AimBot) {
+		Render::DrawFovCircle(LocalEntity);
+
+		if (MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)) {
+			if (AimPosList.size() != 0) {
+				if (AimControl::Rage && !MenuConfig::SafeMode)
+					AimControl::Ragebot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
+				else
+					AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
+			}
+		}
+
+		if (MenuConfig::AimToggleMode && (GetAsyncKeyState(AimControl::HotKey) & 0x8000) && currentTick - lastTick >= 200) {
+			AimControl::switchToggle();
+			lastTick = currentTick;
+		}
+	}
+
+	if (!AimControl::AimBot || !AimControl::HasTarget)
+		RCS::RecoilControl(LocalEntity);
+
+	GUI::InitHitboxList();
+
 	// Radar render
 	if(RadarCFG::ShowRadar)
 	{
@@ -307,30 +330,6 @@ void Cheats::Run()
 	RenderCrossHair(ImGui::GetBackgroundDrawList());
 
 	bmb::RenderWindow();
-	
-	// Aimbot
-	if (MenuConfig::AimBot) {
-		Render::DrawFovCircle(LocalEntity);
-
-		if (MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)) {
-			if (AimPosList.size() != 0) {
-				if (AimControl::Rage && !MenuConfig::SafeMode)
-					AimControl::Ragebot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
-				else
-					AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
-			}
-		}
-
-		if (MenuConfig::AimToggleMode && (GetAsyncKeyState(AimControl::HotKey) & 0x8000) && currentTick - lastTick >= 200) {
-			AimControl::switchToggle();
-			lastTick = currentTick;
-		}
-	}
-
-	if (!AimControl::AimBot || !AimControl::HasTarget)
-		RCS::RecoilControl(LocalEntity);
-
-	GUI::InitHitboxList();
 
 	int currentFPS = static_cast<int>(ImGui::GetIO().Framerate);
 	if (currentFPS > MenuConfig::MaxRenderFPS)

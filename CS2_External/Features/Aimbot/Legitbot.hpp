@@ -95,6 +95,7 @@ namespace AimControl
 
         Vec2 ScreenPos;
 
+
         for (int i = 0; i < ListSize; i++)
         {
             Vec3 OppPos;
@@ -131,10 +132,8 @@ namespace AimControl
             Yaw = atan2f(OppPos.y, OppPos.x) * 57.295779513 - Local.Pawn.ViewAngle.y;
             Pitch = -atan(OppPos.z / Distance) * 57.295779513 - Local.Pawn.ViewAngle.x;
             Norm = sqrt(pow(Yaw, 2) + pow(Pitch, 2));
-
-            if (Norm < BestNorm)
-                BestNorm = Norm;
-
+                if (Norm < BestNorm)
+                    BestNorm = Norm;
             gGame.View.WorldToScreen(Vec3(AimPosList[i]), ScreenPos);
         }
 
@@ -202,7 +201,7 @@ namespace AimControl
             }
 
             int AimInterval = round(1000.0f / MenuConfig::MaxFrameRate);
-            std::this_thread::sleep_for(std::chrono::milliseconds(AimInterval));
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
         }
         else
             HasTarget = false;
