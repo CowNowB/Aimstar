@@ -98,7 +98,7 @@ Please read the following advice carefully before using Aimstar.
 
 ## ⭐ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=CowNowK/AimStar&type=Date)](https://star-history.com/#CowNowK/AimStar&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=CowNowB/Aimstar&type=Date)](https://star-history.com/#CowNowB/Aimstar&Date)
 
 <!--
 ## 💲 Best Resell
