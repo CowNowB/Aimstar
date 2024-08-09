@@ -154,7 +154,7 @@ void Cheats::Run()
 			continue;
 		if (!Entity.UpdatePawn(Entity.Pawn.Address))
 			continue;
-		Misc::SpectatorList(LocalEntity, Entity);
+		//Misc::SpectatorList(LocalEntity, Entity);
 		if (MenuConfig::TeamCheck && Entity.Controller.TeamID == LocalEntity.Controller.TeamID)
 			continue;
 
