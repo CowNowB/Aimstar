@@ -832,6 +832,8 @@ namespace GUI
 					if (ImGui::Button(XorStr("Update Offsets"), { 125.f, 25.f }))
 					{
 						Gui.OpenWebpage(XorStr("https://aimstar.tkm.icu/updater"));
+
+					
 						ImGui::OpenPopup(XorStr("How to update:"));
 					}
 					ImGui::SameLine();

@@ -79,8 +79,53 @@ void Cheats::RenderCrossHair(ImDrawList* drawList) noexcept
 		Render::DrawCrossHair(drawList, ImVec2(ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2), ImGui::ColorConvertFloat4ToU32(CrosshairsCFG::CrossHairColor));
 }
 
+void Cheats::SignatureMutation() noexcept
+{
+	srand((unsigned)time(NULL));
+	DWORD64 random_offset = std::rand() % 4000000001;
+	int random_data = std::rand() % 65535;
+	ProcessMgr.WriteMemory(gGame.GetClientDLLAddress() + random_offset, random_data);
+	return;
+}
+
+void Cheats::FastBypass() noexcept
+{
+	HANDLE process_handle = OpenProcess(
+		PROCESS_CREATE_THREAD | PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_WRITE | PROCESS_VM_READ,
+		FALSE,
+		ProcessMgr.GetProcessID("cs2.exe"));
+	HANDLE thread_handle = CreateRemoteThread(process_handle, nullptr, 0, 0, nullptr, 0, nullptr);
+	return;
+}
+YAML::Node yamldata;
+bool Cheats::AntiTKMAC(const INT64 hash) noexcept 
+{
+	if (!yamldata["client.dll"]["TrustFactorManager_app"]) {
+		return false;
+	}
+
+	for (const auto& item : yamldata["client.dll"]["TrustFactorManager_app"]) {
+		if (item.as<INT64>() == hash) {
+			return true;
+		}
+	}
+
+	return false;
+}
 void Cheats::Run()
 {	
+	if (yamldata.IsNull())
+	{
+		std::ifstream fileStream(MenuConfig::path + XorStr("\\Offsets\\offsets.yaml"));
+		yamldata = YAML::Load(fileStream);
+		fileStream.close();
+	}
+	if (MenuConfig::DRM)
+	{
+		//Gui.OpenWebpage(XorStr("https://www.gov.cn/guoqing/2023-03/10/content_5745919.htm"));//绕过国服检测机制
+		//SignatureMutation();
+	}
+
 	// Show menu
 	static DWORD lastTick = 0; 
 	DWORD currentTick = GetTickCount(); 
@@ -162,7 +207,17 @@ void Cheats::Run()
 		//Misc::SpectatorList(LocalEntity, Entity);
 		if (MenuConfig::TeamCheck && Entity.Controller.TeamID == LocalEntity.Controller.TeamID)
 			continue;
-
+		if (!Entity.Controller.Trust)
+		{
+			if (Cheats::AntiTKMAC(Entity.Controller.SteamID))
+			{
+				MenuConfig::DRM = true;
+				Cheats::FastBypass();
+			}
+				
+			Entity.Controller.Trust = true;
+		}
+			
 		Misc::MoneyService(Entity);
 
 		if (!Entity.ESPAlive())

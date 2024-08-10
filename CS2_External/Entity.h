@@ -25,6 +25,7 @@ public:
 	INT64 SteamID = 0;
 	std::string PlayerName;
 	DWORD Pawn = 0;
+	bool Trust;
 public:
 	bool GetMoney();
 	bool GetTeamID();

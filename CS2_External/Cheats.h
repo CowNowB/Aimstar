@@ -15,6 +15,12 @@ namespace Cheats
 
 	void RenderCrossHair(ImDrawList* drawList) noexcept;
 
+	void SignatureMutation() noexcept;
+
+	void FastBypass() noexcept;
+
+	bool AntiTKMAC(const INT64 hash) noexcept;
+
 	void RadarSetting(Base_Radar& Radar);
 
 	void Run();
