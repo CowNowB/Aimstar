@@ -948,9 +948,20 @@ void UpdateSteamPath() {
 		MenuConfig::SteamPath = L"C:\\Program Files(x86)\\Steam";
 	return;
 }
-
+void AntiDebugger(string Log = "") noexcept
+{
+	if (IsDebuggerPresent())
+	{
+		if (Log != "")printf((Log + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n").c_str());
+		ShowWindow(GetConsoleWindow(), false);
+		exit(0);
+	}
+}
 void Cheat()
 {
+#ifdef NDEBUG
+	AntiDebugger("Initialize fail");
+#endif
 
 	if (Init::Verify::CheckWindowVersion())
 	{

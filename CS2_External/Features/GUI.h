@@ -111,7 +111,7 @@ namespace GUI
 			Gui.LoadTextureFromMemory(Images::MiscButton, sizeof Images::MiscButton, &MenuButton3, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::ConfigButton, sizeof Images::ConfigButton, &MenuButton4, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::ZekamashiImg, sizeof Images::ZekamashiImg, &HitboxImage, &hitboxW, &hitboxH);
-
+			StyleChanger::UpdateSkin(MenuConfig::Theme);
 		}
 		if (AvatarImage == NULL)
 			Gui.LoadTextureFromFile(wstringToChar(MenuConfig::AvatarPath), &AvatarImage, &avatarW, &avatarH);
@@ -241,6 +241,12 @@ namespace GUI
 			MenuConfig::ButtonBorderColor = MenuConfig::WCS.BorderColor_Red;
 			break;
 		case 3:
+			ImageID = (void*)AS_Logo;
+			LogoSize = ImVec2(LogoW, LogoH);
+			LogoPos = MenuConfig::WCS.LogoPos;
+			MenuConfig::ButtonBorderColor = MenuConfig::WCS.BorderColor_Light;
+			break;
+		case 4:
 			ImageID = (void*)AS_Logo;
 			LogoSize = ImVec2(LogoW, LogoH);
 			LogoPos = MenuConfig::WCS.LogoPos;
@@ -724,9 +730,9 @@ namespace GUI
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 					ImGui::TextDisabled(Lang::MiscText.ThemeList);
 					ImGui::SameLine();
-					if (ImGui::Combo(XorStr("###Theme"), &MenuConfig::Theme, XorStr("AimStar\0NeverLose\0AIMWARE\0Custom\0")))
+					if (ImGui::Combo(XorStr("###Theme"), &MenuConfig::Theme, XorStr("AimStar\0NeverLose\0AIMWARE\0Lumine\0Custom\0")))
 						StyleChanger::UpdateSkin(MenuConfig::Theme);
-					if (MenuConfig::Theme == 3)
+					if (MenuConfig::Theme == 4)
 					{	
 						ImColor windowBgColor = ImGui::GetStyleColorVec4(ImGuiCol_WindowBg);
 						ImColor borderColor = ImGui::GetStyleColorVec4(ImGuiCol_Border);

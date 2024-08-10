@@ -26,6 +26,7 @@ namespace MenuConfig
 		ImColor BorderColor_Yellow	= ImColor(255, 204, 0, 255);
 		ImColor BorderColor_Purple	= ImColor(255, 0, 238, 255);
 		ImColor BorderColor_Red		= ImColor(200, 40, 40, 255);
+		ImColor BorderColor_Light	= ImColor(168, 197, 209, 250);
 	} WCS;	// Window Component Settings
 	inline std::wstring SteamPath = L"";
 	inline std::wstring AvatarPath = L"";
@@ -34,7 +35,7 @@ namespace MenuConfig
 	inline int MaxFrameRate = 60;
 	inline bool defaultConfig = false;
 	inline int Language = 0;
-	inline int Theme = 0;
+	inline int Theme = 3;
 	inline bool SafeMode = true;
 	inline int MaxRenderFPS = 144;
 

@@ -556,7 +556,7 @@ namespace MyConfigSaver {
             MenuConfig::Theme = ReadData(config["Menu"]["Theme"], 0);
         }
 
-        if (MenuConfig::Theme == 3)
+        if (MenuConfig::Theme == 4)
         {
             // Custom Theme Loader
             if (config["Custom Theme"])
