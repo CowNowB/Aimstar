@@ -135,6 +135,7 @@ void Cheats::Run()
 	// AimBot data
 	float DistanceToSight = 0;
 	float MaxAimDistance = 100000;
+	CEntity NearestEntity;
 	Vec3  HeadPos{ 0,0,0 };
 	Vec2  Angles{ 0,0 };
 	std::vector<Vec3> AimPosList;
@@ -190,6 +191,7 @@ void Cheats::Run()
 		}*/
 
 		//update Bone select
+
 		if (AimControl::HitboxList.size() != 0)
 		{
 
@@ -197,32 +199,25 @@ void Cheats::Run()
 			{
 				Vec3 TempPos;
 				DistanceToSight = Entity.GetBone().BonePosList[AimControl::HitboxList[p]].ScreenPos.DistanceTo({ Gui.Window.Size.x / 2,Gui.Window.Size.y / 2 });
-				if (LocalEntity.Pawn.ShotsFired >= AimControl::AimBullet + 1 && MenuConfig::SparyPosition != 0)
+				if (!MenuConfig::VisibleCheck ||
+					Entity.Pawn.bSpottedByMask & (DWORD64(1) << (LocalPlayerControllerIndex)) ||
+					LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (p)) ||
+					TriggerBot::InCrosshairCheck(LocalEntity, Entity))
 				{
-					if (!MenuConfig::VisibleCheck ||
-						Entity.Pawn.bSpottedByMask & (DWORD64(1) << (LocalPlayerControllerIndex)) ||
-						LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (p)) ||
-						TriggerBot::InCrosshairCheck(LocalEntity,Entity)
-						)
+					TempPos = Entity.GetBone().BonePosList[AimControl::HitboxList[p]].Pos;
+
+					if (LocalEntity.Pawn.ShotsFired >= AimControl::AimBullet + 1 && MenuConfig::SparyPosition != 0 && NearestEntity.Controller.Address != 0 && Entity.Controller.Address == NearestEntity.Controller.Address)
 					{
-						TempPos = Entity.GetBone().BonePosList[AimControl::HitboxList[p]].Pos;
-						if (AimControl::HitboxList[p] == MenuConfig::SparyPositionIndex){
+						if (AimControl::HitboxList[p] == MenuConfig::SparyPositionIndex) {
 							if (AimControl::HitboxList[p] == BONEINDEX::head)
 								TempPos.z -= 1.f;
 							AimPosList.push_back(TempPos);
 						}
 					}
-				}
-				else if (DistanceToSight < MaxAimDistance)
-				{
-					MaxAimDistance = DistanceToSight;
-
-					if (!MenuConfig::VisibleCheck ||
-						Entity.Pawn.bSpottedByMask & (DWORD64(1) << (LocalPlayerControllerIndex)) ||
-						LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (p)) ||
-						TriggerBot::InCrosshairCheck(LocalEntity, Entity))
+					else if (DistanceToSight < MaxAimDistance)
 					{
-						TempPos = Entity.GetBone().BonePosList[AimControl::HitboxList[p]].Pos;
+						MaxAimDistance = DistanceToSight;
+						NearestEntity = Entity;
 						if (AimControl::HitboxList[p] == BONEINDEX::head)
 							TempPos.z -= 1.f;
 						AimPosList.push_back(TempPos);

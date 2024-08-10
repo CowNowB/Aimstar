@@ -92,6 +92,20 @@ namespace GUI
 			}
 		}
 	}
+	void CheckHitbox()
+	{
+		bool exist = false;
+		for (int value : AimControl::HitboxList) {
+			if (value == MenuConfig::SparyPositionIndex) {
+				exist = true;
+				break;
+			}
+		}
+		if (!exist) {
+			AimControl::HitboxList.push_back(MenuConfig::SparyPositionIndex);
+
+		}
+	}
 	char* wstringToChar(const std::wstring& wstr) {
 		int len = WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), -1, NULL, 0, NULL, NULL);
 		char* buffer = new char[len];
@@ -572,19 +586,24 @@ namespace GUI
 								break;
 							case 1:
 								MenuConfig::SparyPositionIndex = BONEINDEX::head;
+								checkbox1 = true;
 								break;
 							case 2:
 								MenuConfig::SparyPositionIndex = BONEINDEX::neck_0;
+								checkbox2 = true;
 								break;
 							case 3:
 								MenuConfig::SparyPositionIndex = BONEINDEX::spine_1;
+								checkbox3 = true;
 								break;
 							case 4:
 								MenuConfig::SparyPositionIndex = BONEINDEX::pelvis;
+								checkbox4 = true;
 								break;
 							default:
 								break;
 							}
+							CheckHitbox();
 						}
 					}
 					ImGui::NextColumn();
