@@ -227,7 +227,15 @@ namespace MyConfigSaver {
         emitter << YAML::EndMap;
         emitter << YAML::Key << "FastStop" << YAML::Value << MiscCFG::FastStop;
         emitter << YAML::Key << "SpecList" << YAML::Value << MiscCFG::SpecList;
-         emitter << YAML::Key << "Glow" << YAML::Value << MiscCFG::EnemySensor;
+        emitter << YAML::Key << "Glow" << YAML::Value << MiscCFG::EnemySensor;
+        emitter << YAML::Key << "GlowColor";
+        emitter << YAML::Value;
+        emitter << YAML::BeginMap;
+        emitter << YAML::Key << "r" << YAML::Value << MiscCFG::GlowColor.Value.x;
+        emitter << YAML::Key << "g" << YAML::Value << MiscCFG::GlowColor.Value.y;
+        emitter << YAML::Key << "b" << YAML::Value << MiscCFG::GlowColor.Value.z;
+        emitter << YAML::Key << "a" << YAML::Value << MiscCFG::GlowColor.Value.w;
+        emitter << YAML::EndMap;
         emitter << YAML::Key << "RadarHack" << YAML::Value << MiscCFG::RadarHack;
         emitter << YAML::Key << "MoneyService";
         emitter << YAML::Value;
@@ -495,6 +503,10 @@ namespace MyConfigSaver {
             MiscCFG::FastStop = ReadData(config["Misc"]["FastStop"], false);
             MiscCFG::SpecList = ReadData(config["Misc"]["SpecList"], false);
             MiscCFG::EnemySensor = ReadData(config["Misc"]["Glow"], false);
+            MiscCFG::GlowColor.Value.x = ReadData(config["Misc"]["GlowColor"]["r"], 0.f);
+            MiscCFG::GlowColor.Value.y = ReadData(config["Misc"]["GlowColor"]["g"], 0.f);
+            MiscCFG::GlowColor.Value.z = ReadData(config["Misc"]["GlowColor"]["b"], 0.f);
+            MiscCFG::GlowColor.Value.w = ReadData(config["Misc"]["GlowColor"]["a"], 0.f);
             MiscCFG::RadarHack = ReadData(config["Misc"]["RadarHack"], false);
             MiscCFG::MoneyService = ReadData(config["Misc"]["MoneyService"]["Enable"], false);
             MiscCFG::ShowCashSpent = ReadData(config["Misc"]["MoneyService"]["ShowCashSpent"], false);
