@@ -598,7 +598,7 @@ namespace GUI
 								break;
 							case 4:
 								MenuConfig::SparyPositionIndex = BONEINDEX::pelvis;
-								checkbox4 = true;
+								checkbox5 = true;
 								break;
 							default:
 								break;
