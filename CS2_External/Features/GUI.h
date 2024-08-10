@@ -567,7 +567,7 @@ namespace GUI
 						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 193, StartPos.y + 189));
 						if (ImGui::Checkbox(XorStr("###Penis"), &checkbox5))
 						{
-							if (checkbox4) {
+							if (checkbox5) {
 								addHitbox(BONEINDEX::pelvis);
 							}
 							else {
