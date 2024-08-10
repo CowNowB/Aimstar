@@ -84,11 +84,34 @@ void TriggerBot::TargetCheck(const CEntity& LocalEntity) noexcept
 			{
 				if (Entity.UpdatePawn(PawnAddress))
 				{
-					CrosshairsCFG::isAim = CrosshairsCFG::TeamCheck ? (LocalEntity.Pawn.TeamID != Entity.Pawn.TeamID) : true;
+					CrosshairsCFG::isAim = MenuConfig::TeamCheck ? (LocalEntity.Pawn.TeamID != Entity.Pawn.TeamID) : true;
 					return;
 				}
 			}
 		}
 		CrosshairsCFG::isAim = false;
+	}
+}
+bool TriggerBot::InCrosshairCheck(const CEntity& LocalEntity, const CEntity& TargetEntity) noexcept
+{
+	if (!ProcessMgr.ReadMemory<DWORD>(LocalEntity.Pawn.Address + Offset::Pawn.iIDEntIndex, uHandle) || uHandle == -1)
+	{
+		return false;
+	}
+	else
+	{
+		ListEntry = ProcessMgr.TraceAddress(gGame.GetEntityListAddress(), { 0x8 * (uHandle >> 9) + 0x10, 0x0 });
+		if (ListEntry != 0)
+		{
+			if (ProcessMgr.ReadMemory<DWORD64>(ListEntry + 0x78 * (uHandle & 0x1FF), PawnAddress))
+			{
+				if (Entity.UpdatePawn(PawnAddress) && Entity.Pawn.Address == TargetEntity.Pawn.Address)
+					return true;
+				else
+					return false;
+			}
+		}
+		else
+			return false;
 	}
 }

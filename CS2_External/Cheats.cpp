@@ -201,7 +201,9 @@ void Cheats::Run()
 				{
 					if (!MenuConfig::VisibleCheck ||
 						Entity.Pawn.bSpottedByMask & (DWORD64(1) << (LocalPlayerControllerIndex)) ||
-						LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (p)))
+						LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (p)) ||
+						TriggerBot::InCrosshairCheck(LocalEntity,Entity)
+						)
 					{
 						TempPos = Entity.GetBone().BonePosList[AimControl::HitboxList[p]].Pos;
 						if (AimControl::HitboxList[p] == MenuConfig::SparyPositionIndex){
@@ -217,7 +219,8 @@ void Cheats::Run()
 
 					if (!MenuConfig::VisibleCheck ||
 						Entity.Pawn.bSpottedByMask & (DWORD64(1) << (LocalPlayerControllerIndex)) ||
-						LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (p)))
+						LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (p)) ||
+						TriggerBot::InCrosshairCheck(LocalEntity, Entity))
 					{
 						TempPos = Entity.GetBone().BonePosList[AimControl::HitboxList[p]].Pos;
 						if (AimControl::HitboxList[p] == BONEINDEX::head)
