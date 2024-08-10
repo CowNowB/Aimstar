@@ -1,4 +1,5 @@
 ﻿#include "OS-ImGui_Base.h"
+//#include "..\Font\HarmonyOS_SansSC_Bold.h"
 #include "..\Font\fontArray.h"
 #include "..\Font\IconsFontAwesome5.h"
 #include "..\Resources\WeaponIcon.h"
@@ -16,7 +17,7 @@ namespace OSImGui
         ImFontAtlas* fontAtlas = new ImFontAtlas();
         ImFontConfig arialConfig;
         arialConfig.FontDataOwnedByAtlas = false;
-        ImFont* arialFont = fontAtlas->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyh.ttc", 20.0f, &arialConfig, io.Fonts->GetGlyphRangesAll());
+        ImFont* arialFont = fontAtlas->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyhbd.ttc", 20.0f, &arialConfig, io.Fonts->GetGlyphRangesAll());
         
         ImFontConfig iconConfig;
         static const ImWchar iconRanges[] = { ICON_MIN_FA, ICON_MAX_16_FA, 0 };
