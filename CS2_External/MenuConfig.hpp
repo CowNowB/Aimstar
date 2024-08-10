@@ -10,6 +10,7 @@ namespace MenuConfig
 	inline std::string LocalVersion = "4.7.0";
 	inline std::string HWID = "";
 	inline bool DRM = false;
+	inline bool DEC = false;
 
 	struct {
 		// 0: Visual 1: Aimbot 2: Misc 3: Config

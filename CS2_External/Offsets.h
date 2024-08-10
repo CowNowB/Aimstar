@@ -3,7 +3,7 @@
 #include "Utils/ProcessManager.hpp"
 #include "Utils/Helpers.h"
 #include "a2x/offsets.hpp"
-#include "a2x/client.dll.hpp"
+#include "a2x/client_dll.hpp"
 #include "a2x/buttons.hpp"
 
 
@@ -33,6 +33,7 @@ namespace Offset
 	{
 		DWORD IsAlive = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnIsAlive;
 		DWORD m_bControllingBot = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bControllingBot;
+		DWORD m_bEverPlayedOnTeam = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bEverPlayedOnTeam;
 		DWORD PlayerPawn = cs2_dumper::schemas::client_dll::CCSPlayerController::m_hPlayerPawn;
 		DWORD iszPlayerName = cs2_dumper::schemas::client_dll::CBasePlayerController::m_iszPlayerName;
 		DWORD m_sSanitizedPlayerName = cs2_dumper::schemas::client_dll::CCSPlayerController::m_sSanitizedPlayerName;

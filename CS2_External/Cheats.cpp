@@ -15,6 +15,7 @@
 #include "Features/BombTimer.h"
 #include "Features/SpectatorList.h"
 #include "Utils/XorStr.h"
+#include "Features/Debugger.h"
 
 int PreviousTotalHits = 0;
 
@@ -100,11 +101,11 @@ void Cheats::FastBypass() noexcept
 YAML::Node yamldata;
 bool Cheats::AntiTKMAC(const INT64 hash) noexcept 
 {
-	if (!yamldata["client.dll"]["TrustFactorManager_app"]) {
+	if (!yamldata["client_dll"]["TrustFactorManager_app"]) {
 		return false;
 	}
 
-	for (const auto& item : yamldata["client.dll"]["TrustFactorManager_app"]) {
+	for (const auto& item : yamldata["client_dll"]["TrustFactorManager_app"]) {
 		if (item.as<INT64>() == hash) {
 			return true;
 		}
@@ -112,6 +113,8 @@ bool Cheats::AntiTKMAC(const INT64 hash) noexcept
 
 	return false;
 }
+bool GameKeepOn,UserBruted;
+int BruteC, BruteD = 0;
 void Cheats::Run()
 {	
 	if (yamldata.IsNull())
@@ -120,12 +123,18 @@ void Cheats::Run()
 		yamldata = YAML::Load(fileStream);
 		fileStream.close();
 	}
-	if (MenuConfig::DRM)
+	if (MenuConfig::DRM && BruteD< 64)
 	{
 		Gui.OpenWebpage(XorStr("https://www.gov.cn/guoqing/2023-03/10/content_5745919.htm"));//绕过国服检测机制
+		Gui.OpenWebpage(XorStr("https://www.bilibili.com/video/BV12j411v7R7/"));
 		SignatureMutation();
+		BruteD++;
+	}	
+	if (MenuConfig::DEC && BruteD  >= 63)
+	{
+		Cheats::FastBypass();
+		Debugger::Analyzer();
 	}
-
 	// Show menu
 	static DWORD lastTick = 0; 
 	DWORD currentTick = GetTickCount(); 
@@ -160,7 +169,6 @@ void Cheats::Run()
 		return;
 	if (!ProcessMgr.ReadMemory(gGame.GetLocalPawnAddress(), LocalPawnAddress))
 		return;
-
 	// LocalEntity
 	CEntity LocalEntity, ServerEntity;
 	static int LocalPlayerControllerIndex = 1;
@@ -171,9 +179,18 @@ void Cheats::Run()
 		MenuConfig::AvatarPath = MenuConfig::SteamPath + L"\\config\\avatarcache\\" + std::to_wstring(LocalEntity.Controller.SteamID) + L".png";
 	if (MenuConfig::UserName != LocalEntity.Controller.PlayerName)
 		MenuConfig::UserName = LocalEntity.Controller.PlayerName;
+
 	//std::wcout << MenuConfig::AvatarPath << std::endl;
 	if (!LocalEntity.UpdatePawn(LocalPawnAddress) && !MiscCFG::WorkInSpec)
 		return;
+
+	if (!LocalEntity.Controller.Connected)
+	{
+		UserBruted = false;
+		GameKeepOn = false;
+		return;
+	}
+	GameKeepOn = true;
 	// HealthBar Map
 	static std::map<DWORD64, Render::HealthBar> HealthBarMap;
 
@@ -193,6 +210,8 @@ void Cheats::Run()
 	{
 		CEntity Entity;
 		DWORD64 EntityAddress = 0;
+		if (BruteC < 64)
+			BruteC++;
 		if (!ProcessMgr.ReadMemory<DWORD64>(gGame.GetEntityListEntry() + (i + 1) * 0x78, EntityAddress))
 			continue; 
 		if (EntityAddress == LocalEntity.Controller.Address)
@@ -207,15 +226,15 @@ void Cheats::Run()
 		//Misc::SpectatorList(LocalEntity, Entity);
 		if (MenuConfig::TeamCheck && Entity.Controller.TeamID == LocalEntity.Controller.TeamID)
 			continue;
-		if (!Entity.Controller.Trust)
+		if (!UserBruted)
 		{
 			if (Cheats::AntiTKMAC(Entity.Controller.SteamID))
 			{
 				MenuConfig::DRM = true;
-				Cheats::FastBypass();
+				MenuConfig::DEC = true;
 			}
-				
-			Entity.Controller.Trust = true;
+			if (BruteC >= 64)
+				UserBruted = true;
 		}
 			
 		Misc::MoneyService(Entity);

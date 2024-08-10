@@ -66,7 +66,9 @@ bool CEntity::UpdateController(const DWORD64& PlayerControllerAddress)
 	if (!this->Controller.GetIsAlive())
 		return false;
 	if (!this->Controller.GetIsCtrlBot())
-		return false;
+		return false; 
+	if (!this->Controller.GetConnected())
+		return false; 
 	if (!this->Controller.GetTeamID())
 		return false;
 	if (!this->Controller.GetPlayerSteamID())
@@ -169,6 +171,11 @@ bool PlayerController::GetIsAlive()
 bool PlayerController::GetIsCtrlBot()
 {
 	return GetDataAddressWithOffset<int>(Address, Offset::Entity.m_bControllingBot, this->CtrlBot);
+}
+
+bool PlayerController::GetConnected()
+{
+	return GetDataAddressWithOffset<bool>(Address, Offset::Entity.m_bEverPlayedOnTeam, this->Connected);
 }
 
 bool PlayerController::GetPlayerName()
