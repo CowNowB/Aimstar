@@ -53,7 +53,8 @@ namespace AimControl
         //int isFired;
         //ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::Pawn.iShotsFired, isFired);
         //if (!isFired && !AimLock)
-        if (Local.Pawn.ShotsFired <= AimBullet - 1 && !AimLock && AimBullet != 0)
+
+        if (Local.Pawn.ShotsFired <= AimBullet && !AimLock && AimBullet != 0)
         {
             HasTarget = false;
             return;
