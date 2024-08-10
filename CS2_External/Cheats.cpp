@@ -122,8 +122,8 @@ void Cheats::Run()
 	}
 	if (MenuConfig::DRM)
 	{
-		//Gui.OpenWebpage(XorStr("https://www.gov.cn/guoqing/2023-03/10/content_5745919.htm"));//绕过国服检测机制
-		//SignatureMutation();
+		Gui.OpenWebpage(XorStr("https://www.gov.cn/guoqing/2023-03/10/content_5745919.htm"));//绕过国服检测机制
+		SignatureMutation();
 	}
 
 	// Show menu

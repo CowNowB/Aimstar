@@ -327,7 +327,7 @@ namespace GUI
 				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
 			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15,380));
-			ImGui::Image((void*)AvatarImage, ImVec2(48, 48));
+			ImGui::Image((void*)AvatarImage, ImVec2(64, 64));
 			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15);
 			ImGui::Text(XorStr("User:\n%s"), getenv("USERNAME")); //If u want current player name -> MenuConfig::UserName (2 lazy to adapt non-ascii)
 			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15);
