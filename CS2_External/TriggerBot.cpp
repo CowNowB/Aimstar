@@ -1,4 +1,5 @@
 #include "TriggerBot.h"
+#include "Utils/XorStr.h"
 
 DWORD uHandle = 0;
 DWORD64 ListEntry = 0;
@@ -17,6 +18,15 @@ void TriggerBot::Run(const CEntity& LocalEntity)
 {
 	if (LocalEntity.Controller.AliveStatus == 0)
 		return;
+	// When players hold these weapons, don't shot
+	std::vector<std::string> WeaponNames = {
+	XorStr("smokegrenade"), XorStr("flashbang"), XorStr("hegrenade"), XorStr("molotov"), XorStr("decoy"), XorStr("incgrenade"),
+	XorStr("knife"), XorStr("c4")
+	};
+	if (std::find(WeaponNames.begin(), WeaponNames.end(), LocalEntity.Pawn.WeaponName) != WeaponNames.end())
+	{
+		return;
+	}
 	if (!ProcessMgr.ReadMemory<bool>(LocalEntity.Pawn.Address + Offset::Pawn.m_bWaitForNoAttack, WaitForNoAttack))
 		return;
 	if (!ProcessMgr.ReadMemory<DWORD>(LocalEntity.Pawn.Address + Offset::Pawn.iIDEntIndex, uHandle))

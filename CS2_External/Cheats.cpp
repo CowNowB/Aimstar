@@ -365,7 +365,7 @@ void Cheats::Run()
 		}
 	}
 
-	if (!AimControl::AimBot || !AimControl::HasTarget)
+	if (!MenuConfig::AimBot || !AimControl::HasTarget || !(MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)))
 		RCS::RecoilControl(LocalEntity);
 
 	GUI::InitHitboxList();
