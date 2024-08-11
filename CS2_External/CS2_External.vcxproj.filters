@@ -185,6 +185,14 @@
     <ClInclude Include="Utils\driver.hpp" />
     <ClInclude Include="Utils\XorStr.h" />
     <ClInclude Include="Utils\newStructs.hpp" />
+    <ClInclude Include="Utils\kdm\intel_driver.hpp" />
+    <ClInclude Include="Utils\kdm\intel_driver_resource.hpp" />
+    <ClInclude Include="Utils\kdm\kdmapper.hpp" />
+    <ClInclude Include="Utils\kdm\nt.hpp" />
+    <ClInclude Include="Utils\kdm\portable_executable.hpp" />
+    <ClInclude Include="Utils\kdm\service.hpp" />
+    <ClInclude Include="Utils\kdm\utils.hpp" />
+    <ClInclude Include="Font\HarmonyOS_SansSC_Bold.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">
@@ -265,6 +273,7 @@
   <ItemGroup>
     <Font Include="Font\stratum2.ttf" />
     <Font Include="Font\fa-regular.ttf" />
+    <Font Include="Font\HarmonyOS_SansSC_Bold.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Utils\yaml-cpp\lib\yaml-cpp.lib" />

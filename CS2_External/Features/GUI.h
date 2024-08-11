@@ -21,6 +21,7 @@ ID3D11ShaderResourceView* MenuButton2 = NULL;
 ID3D11ShaderResourceView* MenuButton3 = NULL;
 ID3D11ShaderResourceView* MenuButton4 = NULL;
 ID3D11ShaderResourceView* HitboxImage = NULL;
+ID3D11ShaderResourceView* AvatarImage = NULL;
 
 int LogoW = 0, LogoH = 0;
 int LogoW2 = 0, LogoH2 = 0;
@@ -28,7 +29,7 @@ int LogoW3 = 0, LogoH3 = 0;
 int buttonW = 0;
 int buttonH = 0;
 int hitboxW = 0, hitboxH = 0;
-
+int avatarW = 0, avatarH = 0;
 // checkbox for hitbox
 bool checkbox1 = true;
 bool checkbox2 = false;
@@ -91,7 +92,26 @@ namespace GUI
 			}
 		}
 	}
+	void CheckHitbox()
+	{
+		bool exist = false;
+		for (int value : AimControl::HitboxList) {
+			if (value == MenuConfig::SparyPositionIndex) {
+				exist = true;
+				break;
+			}
+		}
+		if (!exist) {
+			AimControl::HitboxList.push_back(MenuConfig::SparyPositionIndex);
 
+		}
+	}
+	char* wstringToChar(const std::wstring& wstr) {
+		int len = WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), -1, NULL, 0, NULL, NULL);
+		char* buffer = new char[len];
+		WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), -1, buffer, len, NULL, NULL);
+		return buffer;
+	}//ONETIME USING..
 	void LoadImages()
 	{
 		if (AS_Logo == NULL)
@@ -105,7 +125,10 @@ namespace GUI
 			Gui.LoadTextureFromMemory(Images::MiscButton, sizeof Images::MiscButton, &MenuButton3, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::ConfigButton, sizeof Images::ConfigButton, &MenuButton4, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::ZekamashiImg, sizeof Images::ZekamashiImg, &HitboxImage, &hitboxW, &hitboxH);
+			StyleChanger::UpdateSkin(MenuConfig::Theme);
 		}
+		if (AvatarImage == NULL)
+			Gui.LoadTextureFromFile(wstringToChar(MenuConfig::AvatarPath), &AvatarImage, &avatarW, &avatarH);
 	}
 
 	// Components Settings
@@ -235,6 +258,12 @@ namespace GUI
 			ImageID = (void*)AS_Logo;
 			LogoSize = ImVec2(LogoW, LogoH);
 			LogoPos = MenuConfig::WCS.LogoPos;
+			MenuConfig::ButtonBorderColor = MenuConfig::WCS.BorderColor_Light;
+			break;
+		case 4:
+			ImageID = (void*)AS_Logo;
+			LogoSize = ImVec2(LogoW, LogoH);
+			LogoPos = MenuConfig::WCS.LogoPos;
 			MenuConfig::ButtonBorderColor = MenuConfig::ButtonBorderColor;
 			break;
 		default:
@@ -254,8 +283,8 @@ namespace GUI
 		{
 			ImGui::SetCursorPos(LogoPos);
 			ImGui::Image(ImageID, LogoSize);
-			ImGui::SetCursorPosY(5);
-			ImGui::TextColored(ImColor(255, 255, 255, 35), MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str());
+			ImGui::SetCursorPos(ImVec2(20,5));
+			ImGui::TextColored(ImColor(255, 255, 255, 45), MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str());
 
 			ImGui::SetCursorPos(MenuConfig::WCS.Button1Pos);
 			ImGui::Image((void*)MenuButton1, ImVec2(buttonW, buttonH));
@@ -297,20 +326,21 @@ namespace GUI
 				ImVec2(MenuConfig::WCS.Button4Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button4Pos.y + buttonH + ImGui::GetWindowPos().y),
 				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
-			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5);
-
-
-
+			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15,365));
+			ImGui::Image((void*)AvatarImage, ImVec2(64, 64));
+			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15);
+			ImGui::Text(XorStr("User:\n%s"), getenv("USERNAME")); //If u want current player name -> MenuConfig::UserName (2 lazy to adapt non-ascii)
+			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15);
 			if (MenuConfig::SafeMode)
 				ImGui::TextColored(ImColor(50, 255, 0, 255), XorStr("Safe Mode ON"));
 			else
 				ImGui::TextColored(ImColor(255, 25, 0, 255), XorStr("Safe Mode OFF"));
-			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15, 105));
+			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15, 85));
 #ifdef USERMODE
 
-			ImGui::Text(XorStr("Ring3-%s-%s"), __DATE__, __TIME__);
+			ImGui::Text(XorStr("Ring3-%s"), __DATE__);
 #else
-			ImGui::Text(XorStr("Kernel-%s-%s"), __DATE__, __TIME__);
+			ImGui::Text(XorStr("Kernel-%s"), __DATE__);
 #endif // USERMODE
 			
 			ImGui::SetCursorPos(MenuConfig::WCS.ChildPos);
@@ -418,7 +448,7 @@ namespace GUI
 						if (CrosshairsCFG::drawCircle)
 							PutSliderFloat(Lang::CrosshairsText.RadiusSlider, 5.f, &CrosshairsCFG::CircleRadius, &CircleRmin, &CircleRmax, "%.f px");
 						PutSwitch(Lang::CrosshairsText.TargetCheck, 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TargetingCrosshairs, true, XorStr("###CircleCol"), reinterpret_cast<float*>(&CrosshairsCFG::TargetedColor));
-						PutSwitch(Lang::CrosshairsText.TeamCheck, 5.f, ImGui::GetFrameHeight() * 1.7, &CrosshairsCFG::TeamCheck);
+						//PutSwitch(Lang::CrosshairsText.TeamCheck, 5.f, ImGui::GetFrameHeight() * 1.7, &CrosshairsCFG::TeamCheck);
 					}
 					
 					ImGui::Columns(1);
@@ -537,7 +567,7 @@ namespace GUI
 						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 193, StartPos.y + 189));
 						if (ImGui::Checkbox(XorStr("###Penis"), &checkbox5))
 						{
-							if (checkbox4) {
+							if (checkbox5) {
 								addHitbox(BONEINDEX::pelvis);
 							}
 							else {
@@ -556,19 +586,24 @@ namespace GUI
 								break;
 							case 1:
 								MenuConfig::SparyPositionIndex = BONEINDEX::head;
+								checkbox1 = true;
 								break;
 							case 2:
 								MenuConfig::SparyPositionIndex = BONEINDEX::neck_0;
+								checkbox2 = true;
 								break;
 							case 3:
 								MenuConfig::SparyPositionIndex = BONEINDEX::spine_1;
+								checkbox3 = true;
 								break;
 							case 4:
 								MenuConfig::SparyPositionIndex = BONEINDEX::pelvis;
+								checkbox5 = true;
 								break;
 							default:
 								break;
 							}
+							CheckHitbox();
 						}
 					}
 					ImGui::NextColumn();
@@ -668,14 +703,15 @@ namespace GUI
 					{
 						PutSliderInt(Lang::MiscText.fovchanger, 10.f, &MiscCFG::Fov, &FovMin, &FovMax, "%d");
 						PutSliderFloat(Lang::MiscText.FlashImmunity, 10.f, &MiscCFG::FlashImmunity, &FlashMin, &FlashMax, "%.f");
-						PutSwitch(Lang::MiscText.Bhop, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::BunnyHop);
+						
 					}
+					PutSwitch(Lang::MiscText.Bhop, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::BunnyHop);
 					PutSwitch(Lang::MiscText.bmbTimer, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::bmbTimer, true, XorStr("###bmbTimerCol"), reinterpret_cast<float*>(&MiscCFG::BombTimerCol));
 					PutSwitch(Lang::MiscText.CheatList, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::CheatList);
 					PutSwitch(Lang::MiscText.FastStop, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::FastStop);
 					if (!MenuConfig::SafeMode)
 						PutSwitch(Lang::MiscText.ForceScope, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::ForceScope);
-					PutSwitch(Lang::MiscText.HeadshotLine, 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::ShowHeadShootLine);
+					PutSwitch(Lang::MiscText.HeadshotLine, 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::ShowHeadShootLine, true, "###HSCol", reinterpret_cast<float*>(&MenuConfig::HeadShootLineColor));
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
 					ImGui::TextDisabled(Lang::MiscText.HitSound);
 					ImGui::SameLine();
@@ -688,7 +724,7 @@ namespace GUI
 					if (MiscCFG::MoneyService)
 						PutSwitch(Lang::MiscText.ShowCashSpent, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::ShowCashSpent);
 					PutSwitch(Lang::MiscText.SpecCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WorkInSpec);
-					PutSwitch(Lang::MiscText.EnemySensor, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::EnemySensor);
+					PutSwitch(Lang::MiscText.EnemySensor, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::EnemySensor, true, "###GlowCol", reinterpret_cast<float*>(&MiscCFG::GlowColor));
 					// PutSwitch(Lang::MiscText.SpecList, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::SpecList);
 					PutSwitch(Lang::MiscText.TeamCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TeamCheck);
 					PutSwitch(Lang::MiscText.Watermark, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WaterMark);
@@ -714,9 +750,9 @@ namespace GUI
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 					ImGui::TextDisabled(Lang::MiscText.ThemeList);
 					ImGui::SameLine();
-					if (ImGui::Combo(XorStr("###Theme"), &MenuConfig::Theme, XorStr("AimStar\0NeverLose\0AIMWARE\0Custom\0")))
+					if (ImGui::Combo(XorStr("###Theme"), &MenuConfig::Theme, XorStr("AimStar\0NeverLose\0AIMWARE\0Lumine\0Custom\0")))
 						StyleChanger::UpdateSkin(MenuConfig::Theme);
-					if (MenuConfig::Theme == 3)
+					if (MenuConfig::Theme == 4)
 					{	
 						ImColor windowBgColor = ImGui::GetStyleColorVec4(ImGuiCol_WindowBg);
 						ImColor borderColor = ImGui::GetStyleColorVec4(ImGuiCol_Border);
@@ -797,6 +833,8 @@ namespace GUI
 					if (ImGui::Button(XorStr("Update Offsets"), { 125.f, 25.f }))
 					{
 						Gui.OpenWebpage(XorStr("https://aimstar.tkm.icu/updater"));
+
+					
 						ImGui::OpenPopup(XorStr("How to update:"));
 					}
 					ImGui::SameLine();
