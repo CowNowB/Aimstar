@@ -14,6 +14,9 @@ namespace StyleChanger
 		case 2:
 			Styles::aimwaste();
 			break;
+		case 3:
+			Styles::Lumine();
+			break;
 		default:
 			break;
 		}

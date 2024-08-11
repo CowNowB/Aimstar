@@ -2,7 +2,7 @@ name: buildcheck x64 release
 
 on: 
   pull_request:
-    branches: [ "main" ]
+    branches: [ "dev" ]
 
 jobs:
   build:

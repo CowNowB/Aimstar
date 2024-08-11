@@ -10,11 +10,10 @@
 #include <iostream>
 #include "..\..\View.hpp"
 #include "..\..\Features/RCS.h"
-
-extern "C" {
-#include "..\..\Features\Mouse.h"
+#include "..\..\Utils\XorStr.h"
 #include "..\..\Entity.h"
-}
+#include "..\..\Features\Mouse.h"
+
 
 
 namespace AimControl
@@ -53,7 +52,19 @@ namespace AimControl
         //int isFired;
         //ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::Pawn.iShotsFired, isFired);
         //if (!isFired && !AimLock)
-        if (Local.Pawn.ShotsFired <= AimBullet - 1 && !AimLock && AimBullet != 0)
+
+        // When players hold these weapons, don't aim
+        std::vector<std::string> WeaponNames = {
+        XorStr("smokegrenade"), XorStr("flashbang"), XorStr("hegrenade"), XorStr("molotov"), XorStr("decoy"), XorStr("incgrenade"),
+        XorStr("knife"), XorStr("c4")
+        };
+        if (std::find(WeaponNames.begin(), WeaponNames.end(), Local.Pawn.WeaponName) != WeaponNames.end())
+        {
+            HasTarget = false;
+            return;
+        }
+
+        if (Local.Pawn.ShotsFired <= AimBullet && !AimLock && AimBullet != 0)
         {
             HasTarget = false;
             return;
@@ -70,7 +81,7 @@ namespace AimControl
             }
         }
 
-        if (!IgnoreFlash && Local.Pawn.FlashDuration > 0.f)
+        if (!IgnoreFlash && Local.Pawn.FlashDuration > 0.15f)
             return;
 
         if (MenuConfig::DRM) {//ONLY DRM
@@ -200,8 +211,8 @@ namespace AimControl
                 mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
             }
 
-            int AimInterval = round(1000.0f / MenuConfig::MaxFrameRate);
-            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            int AimInterval = round(1000000.0f / MenuConfig::MaxFrameRate);
+            std::this_thread::sleep_for(std::chrono::microseconds(AimInterval));
         }
         else
             HasTarget = false;
