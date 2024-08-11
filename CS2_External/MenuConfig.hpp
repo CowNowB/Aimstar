@@ -33,6 +33,7 @@ namespace MenuConfig
 	inline std::wstring AvatarPath = L"";
 	inline std::string Country = "";
 	inline std::string UserName = "";
+	inline std::string CurMap = "";
 	inline int MaxFrameRate = 60;
 	inline bool defaultConfig = false;
 	inline int Language = 0;

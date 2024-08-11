@@ -191,6 +191,13 @@ void Cheats::Run()
 		return;
 	}
 	GameKeepOn = true;
+	CGlobalVarsBase Global_Vars;
+	if (!ProcessMgr.ReadMemory<CGlobalVarsBase>(gGame.GetGlobalVarsAddress(), Global_Vars))
+		return;
+	std::string MapName;
+	if (!ProcessMgr.ReadMemory<std::string>(Global_Vars.m_uCurrentMapName, MapName))
+		return;
+	MenuConfig::CurMap = MapName;
 	// HealthBar Map
 	static std::map<DWORD64, Render::HealthBar> HealthBarMap;
 
@@ -405,12 +412,11 @@ void Cheats::Run()
 	Misc::AirCheck(LocalEntity);
 	RenderCrossHair(ImGui::GetBackgroundDrawList());
 
-	bmb::RenderWindow();
-
+	bmb::RenderWindow(LocalEntity);
 	int currentFPS = static_cast<int>(ImGui::GetIO().Framerate);
 	if (currentFPS > MenuConfig::MaxRenderFPS)
 	{
-		int FrameWait = round(1000.0 / MenuConfig::MaxRenderFPS);
-		std::this_thread::sleep_for(std::chrono::milliseconds(FrameWait));
+		int FrameWait = round(1000000.0f / MenuConfig::MaxRenderFPS);
+		std::this_thread::sleep_for(std::chrono::microseconds(FrameWait));
 	}
 }
