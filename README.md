@@ -27,15 +27,15 @@ Discord server: [AimShit Club](https://discord.com/invite/VgRrxwesPz)
 
 Most of the code is contributed by users, and the code structure might be very messy. If you try to download and understand the code, you will find a lot of **shitty** logic
 
-中文文档：[Readme CN](https://github.com/CowNowK/AimStar/blob/main/%E8%87%AA%E8%BF%B0%E6%96%87%E6%A1%A3.md)
+中文文档：[Readme CN](https://github.com/CowNowB/Aimstar/blob/main/%E8%87%AA%E8%BF%B0%E6%96%87%E6%A1%A3.md)
 
-Русский язык: [Readme RU](https://github.com/CowNowK/AimStar/blob/main/ПРОЧИТАЙМЕНЯ.md)
+Русский язык: [Readme RU](https://github.com/CowNowB/Aimstar/blob/main/ПРОЧИТАЙМЕНЯ.md)
 
 > **Due to some force majeure disease factors that happened to me personally, I am unable to maintain the repo in time. I apologize for your understanding.**
 
 ## ⚠️ Notice
 
-**Isnt working?** -> [**__COMMON ISSUES__**](https://github.com/CowNowK/AimStar/wiki)
+**Isnt working?** -> [**__COMMON ISSUES__**](https://github.com/CowNowB/Aimstar/wiki)
 
 ## 📸 Preview
 ![](/Image2.png)
@@ -43,7 +43,7 @@ Most of the code is contributed by users, and the code structure might be very m
 ## 📋 Features
 
 <details>
-https://github.com/CowNowK/AimStar/blob/Loader-v1.0.1/Guides/Features.md (Updating)
+https://github.com/CowNowB/Aimstar/blob/Loader-v1.0.1/Guides/Features.md (Updating)
 <summary>Visual</summary>
   
 - ESP
@@ -98,7 +98,7 @@ Please read the following advice carefully before using Aimstar.
 
 ## ⭐ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=CowNowK/AimStar&type=Date)](https://star-history.com/#CowNowK/AimStar&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=CowNowB/Aimstar&type=Date)](https://star-history.com/#CowNowB/Aimstar&Date)
 
 <!--
 ## 💲 Best Resell
