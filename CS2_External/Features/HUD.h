@@ -20,7 +20,7 @@ namespace HUD
 			ImGui::TextColored(ImColor(255, 255, 255, 200), XorStr("Aimbot [Toggle]"));
 		Misc::CheatText(XorStr("External Radar"), RadarCFG::ShowRadar);
 		if (MiscCFG::FlashImmunity != 0)
-			ImGui::Text(XorStr("Flash Immunity"));
+			ImGui::TextColored(ImColor(255, 255, 255, 200), XorStr("Flash Immunity"));
 		Misc::CheatText(XorStr("Headshot Line"), MenuConfig::ShowHeadShootLine);
 		Misc::CheatText(XorStr("Money Service"), MiscCFG::MoneyService);
 		Misc::CheatText(XorStr("Anti Record"), MenuConfig::BypassOBS);
