@@ -1,11 +1,12 @@
 #pragma once
 
+/*
 struct RGB {
 	unsigned char r, g, b; // values go from 0-255
 	RGB() : r(0), g(0), b(0) { }
 	RGB(unsigned char _r, unsigned char _g, unsigned char _b) : r(_r), g(_g), b(_b) { }
 };
-
+*/
 
 
 struct RGBA {

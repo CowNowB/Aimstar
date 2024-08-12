@@ -19,6 +19,7 @@
 #include "..\MenuConfig.hpp"
 #include "..\OS-ImGui\imgui\imgui.h"
 #include "..\Utils\GlobalVars.h"
+#include "..\Utils\imgui_custom.hpp"
 
 #pragma comment(lib, "winmm.lib")
 
@@ -65,7 +66,7 @@ namespace Misc
 	static inline void CheatText(const char* Cheat, bool config)
 	{
 		if (config)
-			ImGui::TextColored();
+			ImGui::Text(Cheat);
 	}
 
 	static inline void getCurrentTime(struct tm* ptm) {
