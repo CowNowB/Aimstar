@@ -191,13 +191,13 @@ void Cheats::Run()
 		return;
 	}
 	GameKeepOn = true;
-	CGlobalVarsBase Global_Vars;
-	if (!ProcessMgr.ReadMemory<CGlobalVarsBase>(gGame.GetGlobalVarsAddress(), Global_Vars))
-		return;
-	std::string MapName;
-	if (!ProcessMgr.ReadMemory<std::string>(Global_Vars.m_uCurrentMapName, MapName))
-		return;
-	MenuConfig::CurMap = MapName;
+	//CGlobalVarsBase Global_Vars;
+	//if (!ProcessMgr.ReadMemory<CGlobalVarsBase>(gGame.GetGlobalVarsAddress(), Global_Vars))
+		//return;
+	//std::string MapName;
+	//if (!ProcessMgr.ReadMemory<std::string>(Global_Vars.m_uCurrentMapName, MapName))
+		//return;
+	//MenuConfig::CurMap = MapName;
 	// HealthBar Map
 	static std::map<DWORD64, Render::HealthBar> HealthBarMap;
 

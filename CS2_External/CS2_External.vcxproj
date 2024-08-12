@@ -199,6 +199,7 @@
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <OpenMPSupport>true</OpenMPSupport>
       <RemoveUnreferencedCodeData>false</RemoveUnreferencedCodeData>
+      <OmitFramePointers>true</OmitFramePointers>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
