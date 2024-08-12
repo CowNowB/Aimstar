@@ -408,3 +408,4 @@ FodyWeavers.xsd
 *.recipe
 *.jsoniobj
 *.log
+CS2_External/imgui.ini
