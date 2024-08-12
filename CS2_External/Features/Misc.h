@@ -65,7 +65,7 @@ namespace Misc
 	static inline void CheatText(const char* Cheat, bool config)
 	{
 		if (config)
-			ImGui::Text(Cheat);
+			ImGui::TextColored();
 	}
 
 	static inline void getCurrentTime(struct tm* ptm) {
@@ -115,7 +115,6 @@ namespace Misc
 	void MoneyService(const CEntity& EntityList) noexcept;
 	void FakeDuck(const CEntity& EntityList) noexcept;
 	void BunnyHop(const CEntity& Local) noexcept;
-	void CheatList() noexcept;
 	void ForceScope(const CEntity& aLocalPlayer) noexcept;
 	void NightMode() noexcept;
 	void JumpThrow(const CEntity& Local) noexcept;

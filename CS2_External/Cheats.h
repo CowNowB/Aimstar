@@ -8,6 +8,7 @@
 
 #include "Features/Glow.h"
 #include "Features/Misc.h"
+#include "Features/HUD.h"
 
 namespace Cheats
 {

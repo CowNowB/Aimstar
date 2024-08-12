@@ -13,46 +13,6 @@ namespace Misc
 	bool wKeyPressed = false;
 	bool sKeyPressed = false;
 
-	void CheatList() noexcept
-	{
-		if (!MiscCFG::CheatList)
-			return;
-
-		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse;
-		ImGui::SetNextWindowBgAlpha(0.3f);
-		ImGui::SetNextWindowSize(ImVec2(200, 0));
-		ImGui::Begin(XorStr("Cheats List"), nullptr, windowFlags);
-
-		if (MenuConfig::AimBot && (MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)))
-			ImGui::Text(XorStr("Aimbot [Toggle]"));
-		CheatText(XorStr("Anti Record"), MenuConfig::BypassOBS);
-		CheatText(XorStr("Bhop"), MiscCFG::BunnyHop);
-		CheatText(XorStr("Bomb Timer"), MiscCFG::bmbTimer);
-		CheatText(XorStr("Crosshair"), CrosshairsCFG::ShowCrossHair);
-		CheatText(XorStr("Enemy Sensor"), MiscCFG::EnemySensor);
-		CheatText(XorStr("ESP"), ESPConfig::ESPenabled);
-		CheatText(XorStr("External Radar"), RadarCFG::ShowRadar);
-		CheatText(XorStr("Fake Duck"), MiscCFG::Jitter);
-		CheatText(XorStr("Fast Stop"), MiscCFG::FastStop);
-		if (MiscCFG::FlashImmunity != 0)
-			ImGui::Text(XorStr("Flash Immunity"));
-		CheatText(XorStr("Force Scope"), MiscCFG::ForceScope);
-		if (MiscCFG::Fov != 90)
-			ImGui::Text(XorStr("Fov Changer"));
-		CheatText(XorStr("Headshot Line"), MenuConfig::ShowHeadShootLine);
-		CheatText(XorStr("HitSound"), MiscCFG::HitSound);
-		CheatText(XorStr("Money Service"), MiscCFG::MoneyService);
-		CheatText(XorStr("No Smoke"), MiscCFG::NoSmoke);
-		CheatText(XorStr("Radar Hack"), MiscCFG::RadarHack);
-		CheatText(XorStr("RCS"), MenuConfig::RCS);
-		CheatText(XorStr("Smoke Color"), MiscCFG::SmokeColored);
-		CheatText(XorStr("Spec List"), MiscCFG::SpecList);
-		if (MenuConfig::TriggerBot && (MenuConfig::TriggerAlways || GetAsyncKeyState(MenuConfig::TriggerHotKey)))
-			ImGui::Text(XorStr("TriggerBot [Toggle]"));
-
-		ImGui::End();
-	}
-
 	void Watermark(const CEntity& LocalPlayer) noexcept
 	{
 		if (!MiscCFG::WaterMark)

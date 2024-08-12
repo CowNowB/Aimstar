@@ -396,9 +396,9 @@ void Cheats::Run()
 	Misc::Watermark(LocalEntity);
 	Misc::FakeDuck(LocalEntity);
 	Misc::BunnyHop(LocalEntity);
-	Misc::CheatList();
 	Misc::ForceScope(LocalEntity);
 	Misc::JumpThrow(LocalEntity);
+	HUD::CheatList();
 
 
 	// Fov line
