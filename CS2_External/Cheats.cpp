@@ -37,7 +37,7 @@ void Cheats::KeyCheckThread()
 
 void Cheats::RadarSetting(Base_Radar& Radar)
 {
-	// Radar window 
+	// Radar window
 	ImGui::SetNextWindowBgAlpha(RadarCFG::RadarBgAlpha);
 	ImGui::Begin(XorStr("Radar"), 0, ImGuiWindowFlags_NoResize);
 	ImGui::SetWindowSize({ RadarCFG::RadarRange * 2,RadarCFG::RadarRange * 2 });
