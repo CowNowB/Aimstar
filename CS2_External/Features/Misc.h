@@ -66,7 +66,7 @@ namespace Misc
 	static inline void CheatText(const char* Cheat, bool config)
 	{
 		if (config)
-			ImGui::Text(Cheat);
+			ImGui::TextColored(ImColor(255, 255, 255, 200), Cheat);
 	}
 
 	static inline void getCurrentTime(struct tm* ptm) {

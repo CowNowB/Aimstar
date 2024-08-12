@@ -17,31 +17,32 @@ namespace HUD
 		ImGui::PopStyleColor();
 
 		if (MenuConfig::AimBot && (MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)))
-			ImGui::Text(XorStr("Aimbot [Toggle]"));
-		Misc::CheatText(XorStr("Anti Record"), MenuConfig::BypassOBS);
-		Misc::CheatText(XorStr("Bhop"), MiscCFG::BunnyHop);
-		Misc::CheatText(XorStr("Bomb Timer"), MiscCFG::bmbTimer);
-		Misc::CheatText(XorStr("Crosshair"), CrosshairsCFG::ShowCrossHair);
-		Misc::CheatText(XorStr("Enemy Sensor"), MiscCFG::EnemySensor);
-		Misc::CheatText(XorStr("ESP"), ESPConfig::ESPenabled);
+			ImGui::TextColored(ImColor(255, 255, 255, 200), XorStr("Aimbot [Toggle]"));
 		Misc::CheatText(XorStr("External Radar"), RadarCFG::ShowRadar);
-		Misc::CheatText(XorStr("Fake Duck"), MiscCFG::Jitter);
-		Misc::CheatText(XorStr("Fast Stop"), MiscCFG::FastStop);
 		if (MiscCFG::FlashImmunity != 0)
 			ImGui::Text(XorStr("Flash Immunity"));
-		Misc::CheatText(XorStr("Force Scope"), MiscCFG::ForceScope);
-		if (MiscCFG::Fov != 90)
-			ImGui::Text(XorStr("Fov Changer"));
 		Misc::CheatText(XorStr("Headshot Line"), MenuConfig::ShowHeadShootLine);
-		Misc::CheatText(XorStr("HitSound"), MiscCFG::HitSound);
 		Misc::CheatText(XorStr("Money Service"), MiscCFG::MoneyService);
-		Misc::CheatText(XorStr("No Smoke"), MiscCFG::NoSmoke);
-		Misc::CheatText(XorStr("Radar Hack"), MiscCFG::RadarHack);
-		Misc::CheatText(XorStr("RCS"), MenuConfig::RCS);
+		Misc::CheatText(XorStr("Anti Record"), MenuConfig::BypassOBS);
+		if (MiscCFG::Fov != 90)
+			ImGui::TextColored(ImColor(255, 255, 255, 200), XorStr("Fov Changer"));
+		Misc::CheatText(XorStr("Force Scope"), MiscCFG::ForceScope);
 		Misc::CheatText(XorStr("Smoke Color"), MiscCFG::SmokeColored);
+		Misc::CheatText(XorStr("Bomb Timer"), MiscCFG::bmbTimer);
+		Misc::CheatText(XorStr("Radar Hack"), MiscCFG::RadarHack);
+		Misc::CheatText(XorStr("Jump Throw"), MiscCFG::jumpthrow);
+		Misc::CheatText(XorStr("TriggerBot"), MenuConfig::TriggerBot);
+		Misc::CheatText(XorStr("Crosshair"), CrosshairsCFG::ShowCrossHair);
+		Misc::CheatText(XorStr("Fake Duck"), MiscCFG::Jitter);
+		Misc::CheatText(XorStr("Fast Stop"), MiscCFG::FastStop);
+		Misc::CheatText(XorStr("HitMarker"), MiscCFG::HitMarker);
 		Misc::CheatText(XorStr("Spec List"), MiscCFG::SpecList);
-		if (MenuConfig::TriggerBot && (MenuConfig::TriggerAlways || GetAsyncKeyState(MenuConfig::TriggerHotKey)))
-			ImGui::Text(XorStr("TriggerBot [Toggle]"));
+		Misc::CheatText(XorStr("HitSound"), MiscCFG::HitSound);
+		Misc::CheatText(XorStr("No Smoke"), MiscCFG::NoSmoke);
+		Misc::CheatText(XorStr("Bhop"), MiscCFG::BunnyHop);
+		Misc::CheatText(XorStr("Glow"), MiscCFG::EnemySensor);
+		Misc::CheatText(XorStr("ESP"), ESPConfig::ESPenabled);
+		Misc::CheatText(XorStr("RCS"), MenuConfig::RCS);
 
 		ImGui::End();
 	}

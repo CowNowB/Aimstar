@@ -834,7 +834,7 @@ namespace GUI
 					
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 					if (ImGui::Button(XorStr(ICON_FA_COPY " Source Code"), { ImGui::GetColumnWidth() - 20.f, 25.f }))
-						Gui.OpenWebpage(XorStr("https://github.com/CowNowK/AimStar"));
+						Gui.OpenWebpage(XorStr("https://github.com/CowNowB/Aimstar"));
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 					if (ImGui::Button(XorStr(ICON_FA_COMMENT_DOTS " Join Discord"), { ImGui::GetColumnWidth() - 20.f, 25.f }))
 						Gui.OpenWebpage(XorStr("https://discord.com/invite/VgRrxwesPz"));

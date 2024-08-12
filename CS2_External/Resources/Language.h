@@ -353,7 +353,7 @@ namespace Lang
 		MiscText.HitSound ="Hit Sound ";
 		MiscText.bmbTimer ="Bomb Timer";
 		MiscText.SpecList ="Spec List";
-		MiscText.Bhop ="Auto Jump";
+		MiscText.Bhop ="Bhop";
 		MiscText.Watermark ="Watermark";
 		MiscText.CheatList ="Cheat List";
 		MiscText.TeamCheck ="Team Check";
