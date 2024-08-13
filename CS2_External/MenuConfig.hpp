@@ -199,8 +199,6 @@ namespace MiscCFG
 	inline bool bmbTimer = false;
 	inline bool FastStop = false;
 	inline bool SpecList = false;
-	inline bool EnemySensor = false;
-	inline ImColor GlowColor = ImColor(255, 0, 0, 255);
 	inline bool RadarHack = false;
 	inline bool MoneyService = false;
 	inline bool ShowCashSpent = false;
@@ -221,4 +219,9 @@ namespace MiscCFG
 	inline ImColor FireColor = ImColor(0, 255, 0, 255);
 
 	inline bool Jitter = false;
+
+	inline bool EnemySensor = false;
+	inline ImColor GlowColor = ImColor(255, 0, 0, 255);
+	inline bool GlowRainbow = false;
+	inline float Rainbow_Speed = 1.f;
 }
