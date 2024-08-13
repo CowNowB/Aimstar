@@ -67,6 +67,7 @@ namespace Misc
 	{
 		if (config)
 			ImGui::TextColored(ImColor(255, 255, 255, 200), Cheat);
+			// ImGui::chromaText(Cheat, 10.f, 5.f, 1.f, 50.f, 0.02f, 0.08f);
 	}
 
 	static inline void getCurrentTime(struct tm* ptm) {
