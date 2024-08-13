@@ -38,7 +38,7 @@ namespace MenuConfig
 	inline bool defaultConfig = false;
 	inline int Language = 0;
 	inline int Theme = 3;
-	inline bool SafeMode = true;
+	inline bool SafeMode = false;
 	inline int MaxRenderFPS = 144;
 
 	inline bool AirJump = false;
