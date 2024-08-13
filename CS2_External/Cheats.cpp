@@ -359,7 +359,7 @@ void Cheats::Run()
 
 		if (MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)) {
 			if (AimPosList.size() != 0) {
-				if (AimControl::Rage && !MenuConfig::SafeMode)
+				if (AimControl::Rage)
 					AimControl::Ragebot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
 				else
 					AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);

@@ -85,7 +85,6 @@ namespace AimControl
             return;
 
         if (MenuConfig::DRM) {//ONLY DRM
-            MenuConfig::SafeMode = false;
             gGame.SetViewAngle(rand() % 180, rand() % 89);
             gGame.SetForceJump(65537);
             gGame.SetForceCrouch(65537);
