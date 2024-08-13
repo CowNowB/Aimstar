@@ -1,4 +1,5 @@
 ﻿#pragma once
+#define IMGUI_DEFINE_MATH_OPERATORS
 #include <functional>
 
 #include "..\MenuConfig.hpp"
@@ -326,28 +327,32 @@ namespace GUI
 				ImVec2(MenuConfig::WCS.Button4Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button4Pos.y + buttonH + ImGui::GetWindowPos().y),
 				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
-			ImColor BgCol = ImGui::GetStyleColorVec4(ImGuiCol_WindowBg);
+			ImColor BgCol = ImGui::GetStyleColorVec4(ImGuiCol_ChildBg);
 			ImColor Alpha = ImColor(0, 0, 0, 0);
-			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15,365));
+			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15,440));
+			ImGui::BeginChild("User", { 150,60 });
 
 			// Rounding avatar
 			ImVec2 tempPos1, tempPos2, wdPos;
+			ImGui::SetCursorPos({ ImGui::GetCursorPosX() + 5,ImGui::GetCursorPosY() + 10});
 			tempPos1 = ImGui::GetCursorPos();
 			ImDrawList* DrawList = ImGui::GetForegroundDrawList();
-			ImGui::Image((void*)AvatarImage, ImVec2(64, 64));
+			ImGui::Image((void*)AvatarImage, ImVec2(40, 40));
 			tempPos2 = ImGui::GetCursorPos();
 			ImGui::SetCursorPos(tempPos1);
 			wdPos = ImGui::GetWindowPos();
 			DrawList->AddRectFilledMultiColorRounded({ wdPos.x + ImGui::GetCursorPosX(), wdPos.y + ImGui::GetCursorPosY() },
-				{ wdPos.x + ImGui::GetCursorPosX() + 64, wdPos.y + ImGui::GetCursorPosY() + 64 },
+				{ wdPos.x + ImGui::GetCursorPosX() + 40, wdPos.y + ImGui::GetCursorPosY() + 40 },
 				BgCol,
 				Alpha, Alpha, Alpha, Alpha,
 				15.f,
 				ImDrawCornerFlags_All);
-			ImGui::SetCursorPos(tempPos2);
 
-			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15);
+			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15 + 48);
+			ImGui::SameLine();
 			ImGui::Text(XorStr("User:\n%s"), getenv("USERNAME")); //If u want current player name -> MenuConfig::UserName (2 lazy to adapt non-ascii)
+			ImGui::EndChild();
+
 			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15);
 			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15, 85));
 #ifdef USERMODE
