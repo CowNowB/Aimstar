@@ -39,7 +39,7 @@ namespace MenuConfig
 	inline int Language = 0;
 	inline int Theme = 3;
 	inline bool SafeMode = false;
-	inline int MaxRenderFPS = 144;
+	inline int MaxRenderFPS = 1200;
 
 	inline bool AirJump = false;
 	inline float ComboWidth = 100.f;
