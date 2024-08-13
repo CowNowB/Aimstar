@@ -31,6 +31,7 @@ namespace HUD
 		Misc::CheatText(XorStr("Bomb Timer"), MiscCFG::bmbTimer);
 		Misc::CheatText(XorStr("Radar Hack"), MiscCFG::RadarHack);
 		Misc::CheatText(XorStr("Jump Throw"), MiscCFG::jumpthrow);
+		Misc::CheatText(XorStr("Night Mode"), MiscCFG::NightMode);
 		Misc::CheatText(XorStr("TriggerBot"), MenuConfig::TriggerBot);
 		Misc::CheatText(XorStr("Crosshair"), CrosshairsCFG::ShowCrossHair);
 		Misc::CheatText(XorStr("Fake Duck"), MiscCFG::Jitter);
