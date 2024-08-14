@@ -1,7 +1,7 @@
 {
     "Version": "1.1",
     "Data": {
-        "Source": "c:\\program files\\microsoft visual studio\\2022\\professional\\vc\\tools\\msvc\\14.39.33519\\modules\\std.ixx",
+        "Source": "e:\\visualstudio\\vc\\tools\\msvc\\14.40.33807\\modules\\std.ixx",
         "ProvidedModule": "std",
         "ImportedModules": [],
         "ImportedHeaderUnits": []

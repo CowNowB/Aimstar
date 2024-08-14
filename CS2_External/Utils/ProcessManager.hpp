@@ -339,8 +339,8 @@ public:
 	template <typename ReadType>
 	bool WriteMemory(DWORD64 Address, ReadType& Value, int Size)
 	{
-		if (MenuConfig::SafeMode)
-			return false;
+		//if (MenuConfig::SafeMode)
+			//return false;
 		driver.write((uintptr_t)Address, Value, Size);
 		return true;
 	}
@@ -348,8 +348,8 @@ public:
 	template <typename ReadType>
 	bool WriteMemory(DWORD64 Address, ReadType& Value)
 	{
-		if (MenuConfig::SafeMode)
-			return false;
+		//if (MenuConfig::SafeMode)
+			//return false;
 		driver.write((uintptr_t)Address, Value);
 		return true;
 	}

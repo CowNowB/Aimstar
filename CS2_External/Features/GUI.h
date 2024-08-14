@@ -228,6 +228,13 @@ namespace GUI
 		Gui.SliderScalarEx2("", ImGuiDataType_Float, v, p_min, p_max, "", ImGuiSliderFlags_None);
 		ImGui::PopID();
 	}
+	void CircleImage(ImTextureID user_texture_id, float diameter, const ImVec2& uv0 = ImVec2(0, 0), const ImVec2& uv1 = ImVec2(1, 1), const ImVec4& tint_col = ImVec4(1, 1, 1, 1))
+	{
+		ImVec2 p_min = ImGui::GetCursorScreenPos();
+		ImVec2 p_max = ImVec2(p_min.x + diameter, p_min.y + diameter);
+		ImGui::GetWindowDrawList()->AddImageRounded(user_texture_id, p_min, p_max, uv0, uv1, ImGui::GetColorU32(tint_col), diameter * 0.5f);
+		ImGui::Dummy(ImVec2(diameter, diameter));
+	}
 	// ########################################
 
 	void NewGui()
@@ -337,17 +344,7 @@ namespace GUI
 			ImGui::SetCursorPos({ ImGui::GetCursorPosX() + 5,ImGui::GetCursorPosY() + 10});
 			tempPos1 = ImGui::GetCursorPos();
 			ImDrawList* DrawList = ImGui::GetForegroundDrawList();
-			ImGui::Image((void*)AvatarImage, ImVec2(40, 40));
-			tempPos2 = ImGui::GetCursorPos();
-			ImGui::SetCursorPos(tempPos1);
-			wdPos = ImGui::GetWindowPos();
-			DrawList->AddRectFilledMultiColorRounded({ wdPos.x + ImGui::GetCursorPosX(), wdPos.y + ImGui::GetCursorPosY() },
-				{ wdPos.x + ImGui::GetCursorPosX() + 40, wdPos.y + ImGui::GetCursorPosY() + 40 },
-				BgCol,
-				Alpha, Alpha, Alpha, Alpha,
-				15.f,
-				ImDrawCornerFlags_All);
-
+			CircleImage((void*)AvatarImage, 40);
 			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15 + 48);
 			ImGui::SameLine();
 			ImGui::Text(XorStr("User:\n%s"), getenv("USERNAME")); //If u want current player name -> MenuConfig::UserName (2 lazy to adapt non-ascii)
