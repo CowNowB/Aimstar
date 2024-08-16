@@ -236,6 +236,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "b" << YAML::Value << MiscCFG::GlowColor.Value.z;
         emitter << YAML::Key << "a" << YAML::Value << MiscCFG::GlowColor.Value.w;
         emitter << YAML::EndMap;
+        emitter << YAML::Key << "RainbowedGlow" << YAML::Value << MiscCFG::GlowRainbow;
         emitter << YAML::Key << "RadarHack" << YAML::Value << MiscCFG::RadarHack;
         emitter << YAML::Key << "MoneyService";
         emitter << YAML::Value;
@@ -506,6 +507,7 @@ namespace MyConfigSaver {
             MiscCFG::GlowColor.Value.y = ReadData(config["Misc"]["GlowColor"]["g"], 0.f);
             MiscCFG::GlowColor.Value.z = ReadData(config["Misc"]["GlowColor"]["b"], 0.f);
             MiscCFG::GlowColor.Value.w = ReadData(config["Misc"]["GlowColor"]["a"], 0.f);
+            MiscCFG::GlowRainbow = ReadData(config["Misc"]["RainbowedGlow"], false);
             MiscCFG::RadarHack = ReadData(config["Misc"]["RadarHack"], false);
             MiscCFG::MoneyService = ReadData(config["Misc"]["MoneyService"]["Enable"], false);
             MiscCFG::ShowCashSpent = ReadData(config["Misc"]["MoneyService"]["ShowCashSpent"], false);
