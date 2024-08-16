@@ -415,3 +415,9 @@ CS2_External/imgui.ini
 /Driver/x64/Debug/microsoft/STL/std.ixx.ifc.dt.module.json
 /Driver/x64/Debug/microsoft/STL/std.ixx.ifc.dt.module.json.command
 /Driver/x64/Debug/microsoft/STL/std.compat.ixx.ifc.dt.module.json.command
+/Driver/x64/Release/microsoft/STL/std.compat.ixx.ifc.dt.module.json
+/Driver/x64/Release/microsoft/STL/std.compat.ixx.ifc.dt.module.json.command
+/Driver/x64/Release/microsoft/STL/std.ixx.ifc.dt.module.json
+/Driver/x64/Release/microsoft/STL/std.ixx.ifc.dt.module.json.command
+/Driver/x64/Release/microsoft/STL/std.ixx.ifc.dt.d.json
+/Driver/x64/Release/microsoft/STL/std.compat.ixx.ifc.dt.d.json
