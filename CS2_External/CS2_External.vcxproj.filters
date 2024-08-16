@@ -199,6 +199,7 @@
     <ClInclude Include="Utils\Ext-Color.hpp" />
     <ClInclude Include="Utils\Ext-Time.hpp" />
     <ClInclude Include="Utils\BytesManager.h" />
+    <ClInclude Include="Features\Aimbot\SilentAim.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">
