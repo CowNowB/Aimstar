@@ -198,6 +198,7 @@
     <ClInclude Include="Utils\Ext-String.hpp" />
     <ClInclude Include="Utils\Ext-Color.hpp" />
     <ClInclude Include="Utils\Ext-Time.hpp" />
+    <ClInclude Include="Utils\BytesManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">
@@ -269,6 +270,7 @@
     <ClCompile Include="Utils\Ext-String.cpp" />
     <ClCompile Include="Utils\Ext-Color.cpp" />
     <ClCompile Include="Utils\Ext-Time.cpp" />
+    <ClCompile Include="Utils\BytesManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CS2_External.rc" />

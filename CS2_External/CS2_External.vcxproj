@@ -289,6 +289,7 @@
     <ClInclude Include="Resources\Sounds.h" />
     <ClInclude Include="Resources\WeaponIcon.h" />
     <ClInclude Include="TriggerBot.h" />
+    <ClInclude Include="Utils\BytesManager.h" />
     <ClInclude Include="Utils\Ext-Color.hpp" />
     <ClInclude Include="Utils\ConfigMenu.hpp" />
     <ClInclude Include="Utils\ConfigSaver.hpp" />
@@ -377,6 +378,7 @@
     <ClCompile Include="OS-ImGui\OS-ImGui_External.cpp" />
     <ClCompile Include="Radar\Radar.cpp" />
     <ClCompile Include="TriggerBot.cpp" />
+    <ClCompile Include="Utils\BytesManager.cpp" />
     <ClCompile Include="Utils\Ext-Color.cpp" />
     <ClCompile Include="Utils\ConfigMenu.cpp" />
     <ClCompile Include="Utils\ConfigSaver.cpp" />
