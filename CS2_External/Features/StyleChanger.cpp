@@ -17,6 +17,9 @@ namespace StyleChanger
 		case 3:
 			Styles::Lumine();
 			break;
+		case 4:
+			Styles::Fatality();
+			break;
 		default:
 			break;
 		}
