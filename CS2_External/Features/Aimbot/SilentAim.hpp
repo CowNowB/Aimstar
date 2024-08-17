@@ -138,3 +138,8 @@ namespace SilentAim
 	}
 
 }
+
+namespace AimControl
+{
+	inline bool silent = false;
+}

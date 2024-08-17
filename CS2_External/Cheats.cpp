@@ -357,6 +357,10 @@ void Cheats::Run()
 	if (MenuConfig::AimBot) {
 		Render::DrawFovCircle(LocalEntity);
 
+		if (AimControl::silent) {
+			SilentAim::Hook()
+		}
+
 		if (MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)) {
 			if (AimPosList.size() != 0) {
 				if (AimControl::Rage)

@@ -5,6 +5,7 @@
 #include "..\MenuConfig.hpp"
 #include "..\Render.hpp"
 #include "..\Features\Aimbot\Legitbot.hpp"
+#include "..\Features\Aimbot\SilentAim.hpp"
 #include "..\Radar\Radar.h"
 #include "..\TriggerBot.h"
 #include "..\Utils\ConfigMenu.hpp"
@@ -489,6 +490,7 @@ namespace GUI
 					PutSwitch(Lang::AimbotText.Enable, 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::AimBot);
 					if (MenuConfig::AimBot)
 					{
+						// PutSwitch("Silent Aim", 10.f, ImGui::GetFrameHeight() * 1.7, &AimControl::silent);
 						PutSwitch(Lang::AimbotText.Ragebot, 10.f, ImGui::GetFrameHeight() * 1.7, &AimControl::Rage);
 
 						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
