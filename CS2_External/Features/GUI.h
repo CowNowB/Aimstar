@@ -421,9 +421,9 @@ namespace GUI
 					ImGui::SeparatorText(XorStr(ICON_FA_LIGHTBULB" Glow"));
 					float SpeedMin = 1.f, SpeedMax = 20.f;
 					PutSwitch(Lang::MiscText.EnemySensor, 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::EnemySensor, true, "###GlowCol", reinterpret_cast<float*>(&MiscCFG::GlowColor));
-					PutSwitch("Rainbow", 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::GlowRainbow);
+					PutSwitch(XorStr("Rainbow"), 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::GlowRainbow);
 					if (MiscCFG::GlowRainbow)
-						PutSliderFloat("Rainbow Speed: ", 5.f, &MiscCFG::Rainbow_Speed, &SpeedMin, &SpeedMax, "%.1f");
+						PutSliderFloat(XorStr("Rainbow Speed: "), 5.f, &MiscCFG::Rainbow_Speed, &SpeedMin, &SpeedMax, "%.1f");
 
 					ImGui::SeparatorText(XorStr(ICON_FA_COMPASS" External Radar"));
 					float RadarPointSizeProportionMin = 0.8f, RadarPointSizeProportionMax = 2.f;
